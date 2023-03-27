@@ -9,9 +9,9 @@ import NavigationDrawer from "./src/navigation/NavigationDrawer";
 export default function App() {
   return (
     <NavigationContainer>
-      {/* <NavigationStack /> */}
+      <NavigationStack />
       {/* <NavigationTab /> */}
-      <NavigationDrawer />
+      {/* <NavigationDrawer /> */}
     </NavigationContainer>
   );
 }

@@ -1,10 +1,12 @@
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
 export default function ItemCard(props) {
   const { title, description, id } = props;
+  const navigation = useNavigation();
   const ItemDetails = () => {
-    console.log("Item Detaial: " + title);
+    navigation.navigate("Branch");
   };
   return (
     <TouchableWithoutFeedback onPress={() => ItemDetails()}>

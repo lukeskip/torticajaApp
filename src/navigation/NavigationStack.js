@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import DashBoard from "../screens/DashBoard";
+import DashboardScreen from "../screens/DashboardScreen";
 import BranchScreen from "../screens/BranchScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import NavigationDrawer from "./NavigationDrawer";
@@ -14,7 +14,7 @@ export default function NavigationStack() {
         component={NavigationDrawer}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Dashboard" component={DashBoard} />
+      <Stack.Screen name="Dashboard" component={DashboardScreen} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Branch" component={BranchScreen} />
     </Stack.Navigator>

@@ -6,7 +6,7 @@ export default function ItemCard(props) {
   const { title, description, id } = props;
   const navigation = useNavigation();
   const ItemDetails = () => {
-    navigation.navigate("Branch");
+    navigation.navigate("Branch", { id: id });
   };
   return (
     <TouchableWithoutFeedback onPress={() => ItemDetails()}>

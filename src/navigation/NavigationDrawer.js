@@ -3,7 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import CustomDrawer from "../components/CustomDrawer";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import DashBoard from "../screens/DashBoard";
+import DashboardScreen from "../screens/DashboardScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import LoginScreen from "../screens/LoginScreen";
 
@@ -30,7 +30,7 @@ export default function NavigationDrawer() {
       />
       <Drawer.Screen
         name="Dashboard"
-        component={DashBoard}
+        component={DashboardScreen}
         options={{
           drawerIcon: (color) => (
             <Ionicons name="home-outline" size={22} color={color} />

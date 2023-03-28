@@ -15,7 +15,7 @@ export default function DashBoard(props) {
 
   const loadItems = async () => {
     try {
-      const response = await getData(nextUrl || API_HOST + "/sucursales");
+      const response = await getData(nextUrl || API_HOST + "/branches");
       setItems([...items, ...response.data]);
       setNextUrl(response.links.next);
     } catch (error) {

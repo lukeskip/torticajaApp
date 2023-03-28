@@ -2,17 +2,36 @@ import React from "react";
 import { Text, TextInput, Button, View, Keyboard } from "react-native";
 import { globalStyles } from "../utils/globalStyles";
 import { useFormik } from "formik";
+import { login } from "../api/api-connections";
 import * as Yup from "yup";
+// import useAuth from "../hooks/useAuth";
 
 export default function LoginForm() {
+  // const { login, logout } = useAuth();
+
   const formik = useFormik({
     initialValues: initialValues(),
     validateOnChange: false,
     validationSchema: Yup.object(validationSchema()),
-    onSubmit: (formValues) => {
-      console.log(formValues.email);
+    onSubmit: async (formValues) => {
+      const data = {
+        email: formValues.email,
+        password: formValues.password,
+      };
+      console.log(JSON.stringify(data));
+      await sendAuth(JSON.stringify(data));
     },
   });
+
+  const sendAuth = async (values) => {
+    try {
+      const response = await login(values);
+      console.log("response", response);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <View style={globalStyles.content}>
       <TextInput

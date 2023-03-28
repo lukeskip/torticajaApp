@@ -5,13 +5,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import NavigationStack from "./src/navigation/NavigationStack";
 import NavigationTab from "./src/navigation/NavigationTab";
 import NavigationDrawer from "./src/navigation/NavigationDrawer";
+import { AuthProvider } from "./src/contexts/AuthContext";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <NavigationStack />
-      {/* <NavigationTab /> */}
-      {/* <NavigationDrawer /> */}
+      <AuthProvider>
+        <NavigationStack />
+      </AuthProvider>
     </NavigationContainer>
   );
 }

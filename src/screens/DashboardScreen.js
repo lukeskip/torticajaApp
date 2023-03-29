@@ -5,10 +5,12 @@ import IncomeList from "../components/IncomeList";
 import OutcomeList from "../components/OutcomeList";
 import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
+import useAuth from "../hooks/useAuth";
 
 export default function DashboardScreen(props) {
   [incomes, setIncomes] = useState([]);
   [outcomes, setOutcomes] = useState([]);
+  const { auth } = useAuth();
 
   useEffect(() => {
     (async () => {
@@ -18,7 +20,7 @@ export default function DashboardScreen(props) {
 
   const loadItems = async () => {
     try {
-      const response = await getData(API_HOST + "/dashboard");
+      const response = await getData(API_HOST + "/dashboard", auth);
       setIncomes(response.data.incomes);
       setOutcomes(response.data.outcomes);
     } catch (error) {

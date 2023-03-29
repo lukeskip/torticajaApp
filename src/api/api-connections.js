@@ -1,5 +1,5 @@
 import { API_HOST } from "../utils/constants";
-export async function getData(endpoint) {
+export async function getData(endpoint, token) {
   try {
     console.log("Loading...");
     const response = await fetch(endpoint, {
@@ -12,6 +12,7 @@ export async function getData(endpoint) {
         "Access-Control-Allow-Methods": "GET",
         "Access-Control-Allow-Headers":
           "Origin,OPTIONS,X-Requested-With,Content-type,Accept",
+        Authorization: "Bearer " + token,
       },
     });
     const result = await response.json();

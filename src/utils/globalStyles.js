@@ -88,6 +88,9 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 10,
   },
+  footerText: {
+    textAlign: "center",
+  },
   error: {
     color: colors.error,
   },

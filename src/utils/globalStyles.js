@@ -5,6 +5,10 @@ export const globalStyles = StyleSheet.create({
     padding: 20,
     marginVertical: 10,
   },
+  contentCenter: {
+    justifyContent: "center",
+    flex: 1,
+  },
   title_1: {
     fontSize: 20,
     fontWeight: "bold",
@@ -27,6 +31,18 @@ export const globalStyles = StyleSheet.create({
     borderBottomColor: colors.grayDark,
     borderBottomStyle: "solid",
   },
+  button: {
+    borderRadius: 10,
+    backgroundColor: colors.mainColor,
+    marginVertical: 20,
+    paddingVertical: 10,
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 18,
+    textTransform: "uppercase",
+  },
   pill: {
     backgroundColor: colors.mainColor,
     color: "white",
@@ -39,7 +55,7 @@ export const globalStyles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    margin: 12,
+    marginVertical: 12,
     borderWidth: 1,
     padding: 10,
     borderRadius: 10,

@@ -21,8 +21,7 @@ export async function getData(endpoint) {
   }
 }
 
-export async function login(authData) {
-  console.log(API_HOST + "/login");
+export async function loginApi(authData) {
   try {
     const response = await fetch(API_HOST + "/login", {
       method: "POST",

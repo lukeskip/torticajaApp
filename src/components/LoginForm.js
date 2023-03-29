@@ -1,13 +1,20 @@
 import React from "react";
-import { Text, TextInput, Button, View, Keyboard } from "react-native";
+import {
+  Text,
+  TextInput,
+  Button,
+  View,
+  Keyboard,
+  Pressable,
+} from "react-native";
 import { globalStyles } from "../utils/globalStyles";
 import { useFormik } from "formik";
-import { login } from "../api/api-connections";
+import { loginApi } from "../api/api-connections";
 import * as Yup from "yup";
-// import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 
 export default function LoginForm() {
-  // const { login, logout } = useAuth();
+  const { login, logout } = useAuth();
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -18,14 +25,13 @@ export default function LoginForm() {
         email: formValues.email,
         password: formValues.password,
       };
-      console.log(JSON.stringify(data));
       await sendAuth(JSON.stringify(data));
     },
   });
 
   const sendAuth = async (values) => {
     try {
-      const response = await login(values);
+      const response = await loginApi(values);
       console.log("response", response);
     } catch (error) {
       console.log("error", error);
@@ -33,7 +39,7 @@ export default function LoginForm() {
   };
 
   return (
-    <View style={globalStyles.content}>
+    <View style={[globalStyles.content, globalStyles.contentCenter]}>
       <TextInput
         placeholder="Email"
         style={globalStyles.textInput}
@@ -49,7 +55,9 @@ export default function LoginForm() {
         value={formik.values.password}
         onChangeText={(text) => formik.setFieldValue("password", text)}
       />
-      <Button title="Enviar" onPress={formik.handleSubmit} />
+      <Pressable style={globalStyles.button} onPress={formik.handleSubmit}>
+        <Text style={globalStyles.buttonText}>Enviar</Text>
+      </Pressable>
       <Text style={globalStyles.error}>{formik.errors.email}</Text>
       <Text style={globalStyles.error}>{formik.errors.password}</Text>
     </View>

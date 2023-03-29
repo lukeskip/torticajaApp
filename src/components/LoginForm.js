@@ -15,7 +15,6 @@ import useAuth from "../hooks/useAuth";
 
 export default function LoginForm() {
   const { login, logout } = useAuth();
-
   const formik = useFormik({
     initialValues: initialValues(),
     validateOnChange: false,
@@ -32,7 +31,11 @@ export default function LoginForm() {
   const sendAuth = async (values) => {
     try {
       const response = await loginApi(values);
-      console.log("response", response);
+      if (response.token) {
+        login(response.token);
+      } else {
+        console.log("No autorizado");
+      }
     } catch (error) {
       console.log("error", error);
     }

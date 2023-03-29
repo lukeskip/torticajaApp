@@ -26,10 +26,22 @@ export const globalStyles = StyleSheet.create({
   },
   listContent: {},
   item: {
-    marginVertical: 20,
-    borderBottomWidth: 2,
-    borderBottomColor: colors.grayDark,
+    borderBottomWidth: 1,
+    borderColor: colors.grayDark,
     borderBottomStyle: "solid",
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+    paddingBottom: 10,
+    lineHight: 100,
+  },
+  icon: {
+    marginHorizontal: 10,
+    borderWidth: 1,
+    borderColor: colors.greyDark,
+    padding: 10,
+    borderRadius: 30,
   },
   button: {
     borderRadius: 10,
@@ -59,6 +71,22 @@ export const globalStyles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 10,
+  },
+  flex: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  flexItem: {
+    paddingHorizontal: 5,
+  },
+  card: {
+    flex: 1,
+    padding: 20,
+    height: 200,
+    marginBottom: 20,
+    backgroundColor: "white",
+    borderRadius: 5,
+    marginHorizontal: 10,
   },
   error: {
     color: colors.error,

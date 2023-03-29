@@ -23,7 +23,7 @@ export default function CustomDrawer(props) {
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
       <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#CCC" }}>
-        <Text>Un desarrollode ChekoGarcia.Com</Text>
+        <Text>Un desarrollo de ChekoGarcia.Com</Text>
       </View>
     </View>
   );

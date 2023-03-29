@@ -1,6 +1,7 @@
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import { globalStyles } from "../utils/globalStyles";
 
 export default function ItemCard(props) {
   const { title, description, id } = props;
@@ -10,7 +11,7 @@ export default function ItemCard(props) {
   };
   return (
     <TouchableWithoutFeedback onPress={() => ItemDetails()}>
-      <View style={styles.card}>
+      <View style={globalStyles.card}>
         <Text>id {id}</Text>
         <Text>Titulo: {title}</Text>
         <Text>Descripción {description}</Text>
@@ -18,15 +19,3 @@ export default function ItemCard(props) {
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    padding: 20,
-    height: 200,
-    marginBottom: 20,
-    backgroundColor: "white",
-    borderRadius: 5,
-    marginHorizontal: 10,
-  },
-});

@@ -4,9 +4,11 @@ import DashboardScreen from "../screens/DashboardScreen";
 import BranchScreen from "../screens/BranchScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import NavigationDrawer from "./NavigationDrawer";
-const Stack = createStackNavigator();
+import useAuth from "../hooks/useAuth";
 
 export default function NavigationStack() {
+  const Stack = createStackNavigator();
+  const { auth } = useAuth();
   return (
     <Stack.Navigator initialRouteName="Drawer">
       <Stack.Screen

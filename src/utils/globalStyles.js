@@ -43,6 +43,18 @@ export const globalStyles = StyleSheet.create({
     padding: 10,
     borderRadius: 30,
   },
+  iconTab: {
+    backgroundColor: colors.mainColor,
+    marginTop: -20,
+    width: 60,
+    height: 60,
+    textAlign: "center",
+    borderRadius: 60,
+    alignItems: "center",
+    flex: 1,
+
+    fontSize: 18,
+  },
   button: {
     borderRadius: 10,
     backgroundColor: colors.mainColor,

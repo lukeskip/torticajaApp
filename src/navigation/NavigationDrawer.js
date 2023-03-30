@@ -3,6 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import CustomDrawer from "../components/CustomDrawer";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import useAuth from "../hooks/useAuth";
+import NavigationTab from "./NavigationTab";
 
 import BranchScreen from "../screens/BranchScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -23,6 +24,17 @@ export default function NavigationDrawer() {
     >
       {auth ? (
         <>
+          <Drawer.Screen
+            name="bottomMenu"
+            component={NavigationTab}
+            options={{
+              drawerIcon: (color) => (
+                <Ionicons name="home-outline" size={22} color={color} />
+              ),
+              drawerLabel: "Inicio",
+              title: "",
+            }}
+          />
           <Drawer.Screen
             name="Inicio"
             component={BranchScreen}

@@ -32,7 +32,7 @@ export default function LoginForm() {
     try {
       const response = await loginApi(values);
       if (response.token) {
-        login(response.token);
+        login(response);
       } else {
         console.log("No autorizado");
       }

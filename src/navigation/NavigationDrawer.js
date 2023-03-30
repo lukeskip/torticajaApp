@@ -4,7 +4,7 @@ import CustomDrawer from "../components/CustomDrawer";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import useAuth from "../hooks/useAuth";
 
-import DashboardScreen from "../screens/DashboardScreen";
+import BranchScreen from "../screens/BranchScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import LoginScreen from "../screens/LoginScreen";
 
@@ -16,6 +16,7 @@ export default function NavigationDrawer() {
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: true,
+        label: "",
         headerTitleAlign: "center",
         drawerLabelStyle: { marginLeft: -25 },
       }}
@@ -23,13 +24,14 @@ export default function NavigationDrawer() {
       {auth ? (
         <>
           <Drawer.Screen
-            name="Dashboard"
-            component={DashboardScreen}
+            name="Inicio"
+            component={BranchScreen}
             options={{
               drawerIcon: (color) => (
                 <Ionicons name="home-outline" size={22} color={color} />
               ),
-              title: "Dashboard",
+              drawerLabel: "Inicio",
+              title: "",
             }}
           />
           <Drawer.Screen
@@ -51,7 +53,9 @@ export default function NavigationDrawer() {
             drawerIcon: (color) => (
               <Ionicons name="home-outline" size={22} color={color} />
             ),
-            title: "Accesa a tu cuenta",
+            title: "",
+            drawerLabel: "Accesa a tu cuenta",
+            headerShown: false,
           }}
         />
       )}

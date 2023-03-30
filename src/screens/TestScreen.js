@@ -4,7 +4,8 @@ import { getData } from "../api/api-connections";
 import ItemList from "../components/ItemList";
 import { API_HOST } from "../utils/constants";
 
-export default function DashBoard(props) {
+export default function BranchScreen(props) {
+  const { branch } = props;
   [items, setItems] = useState([]);
   [nextUrl, setNextUrl] = useState(null);
   useEffect(() => {
@@ -15,7 +16,9 @@ export default function DashBoard(props) {
 
   const loadItems = async () => {
     try {
-      const response = await getData(nextUrl || API_HOST + "/branches");
+      const response = await getData(
+        nextUrl || API_HOST + "/branches/" + branch
+      );
       setItems([...items, ...response.data]);
       setNextUrl(response.links.next);
     } catch (error) {

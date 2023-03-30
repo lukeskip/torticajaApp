@@ -1,7 +1,9 @@
 import React, { useState, createContext } from "react";
 
 export const AuthContext = createContext({
-  user: undefined,
+  auth: undefined,
+  role: undefined,
+  branch: undefined,
   login: () => {},
   logout: () => {},
 });
@@ -9,9 +11,12 @@ export const AuthContext = createContext({
 export function AuthProvider(props) {
   const { children } = props;
   const [auth, setAuth] = useState();
+  const [role, setRole] = useState();
+  const [branch, setBranch] = useState();
   const login = (userData) => {
-    setAuth(userData);
-    console.log(auth);
+    setAuth(userData.token);
+    setRole(userData.role);
+    setBranch(userData.branch);
   };
 
   const logout = () => {
@@ -19,6 +24,8 @@ export function AuthProvider(props) {
   };
   const valueContext = {
     auth,
+    role,
+    branch,
     login,
     logout,
   };

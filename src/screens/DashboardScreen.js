@@ -10,6 +10,7 @@ import useAuth from "../hooks/useAuth";
 export default function DashboardScreen(props) {
   [incomes, setIncomes] = useState([]);
   [outcomes, setOutcomes] = useState([]);
+  [status, setStatus] = useState(false);
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -31,10 +32,16 @@ export default function DashboardScreen(props) {
 
   return (
     <ScrollView style={globalStyles.content}>
-      <Text style={globalStyles.title_1}>Ventas</Text>
-      <IncomeList incomes={incomes} />
-      <Text style={globalStyles.title_1}>Gastos</Text>
-      <OutcomeList outcomes={outcomes} />
+      {status ? (
+        <>
+          <Text style={globalStyles.title_1}>Ventas</Text>
+          <IncomeList incomes={incomes} />
+          <Text style={globalStyles.title_1}>Gastos</Text>
+          <OutcomeList outcomes={outcomes} />
+        </>
+      ) : (
+        <Text style={globalStyles.title_1}>No hay datos que mostrar</Text>
+      )}
     </ScrollView>
   );
 }

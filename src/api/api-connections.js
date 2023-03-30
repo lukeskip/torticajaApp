@@ -1,5 +1,6 @@
 import { API_HOST } from "../utils/constants";
 export async function getData(endpoint, token) {
+  console.log(token);
   try {
     console.log("Loading...");
     const response = await fetch(endpoint, {

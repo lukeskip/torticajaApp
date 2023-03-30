@@ -5,7 +5,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import useAuth from "../hooks/useAuth";
 import NavigationTab from "./NavigationTab";
 
-import BranchScreen from "../screens/BranchScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import LoginScreen from "../screens/LoginScreen";
 
@@ -25,19 +24,8 @@ export default function NavigationDrawer() {
       {auth ? (
         <>
           <Drawer.Screen
-            name="bottomMenu"
+            name="Home"
             component={NavigationTab}
-            options={{
-              drawerIcon: (color) => (
-                <Ionicons name="home-outline" size={22} color={color} />
-              ),
-              drawerLabel: "Inicio",
-              title: "",
-            }}
-          />
-          <Drawer.Screen
-            name="Inicio"
-            component={BranchScreen}
             options={{
               drawerIcon: (color) => (
                 <Ionicons name="home-outline" size={22} color={color} />
@@ -53,7 +41,8 @@ export default function NavigationDrawer() {
               drawerIcon: (color) => (
                 <Ionicons name="home-outline" size={22} color={color} />
               ),
-              title: "Configuraciones",
+              drawerLabel: "Configuración",
+              title: "Settings",
             }}
           />
         </>

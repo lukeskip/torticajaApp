@@ -1,21 +1,20 @@
 import { View, Text, Button } from "react-native";
 import React from "react";
+import { globalStyles } from "../utils/globalStyles";
 
 export default function SettingsScreen(props) {
   const { navigation } = props;
-  const goToPage = () => {
-    navigation.navigate("Home");
-  };
+
   return (
-    <View>
+    <View style={globalStyles.content}>
       <Text>SettingsScreen</Text>
-      <Text>SettingsScreen</Text>
-      <Text>SettingsScreen</Text>
-      <Text>SettingsScreen</Text>
-      <Text>SettingsScreen</Text>
-      <Text>SettingsScreen</Text>
-      <Text>SettingsScreen</Text>
-      <Button title="Ir a Home" onPress={goToPage} />
+
+      <Button
+        title="Ir a Home"
+        onPress={() => {
+          navigation.navigate("Home");
+        }}
+      />
     </View>
   );
 }

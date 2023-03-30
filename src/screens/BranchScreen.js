@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
 import { getData } from "../api/api-connections";
 import OrderList from "../components/OrderList";
@@ -23,7 +23,7 @@ export default function BranchScreen(props) {
     if (branch) {
       try {
         const response = await getData(API_HOST + "/branches/" + branch, auth);
-        console.log(response.data.outcomes);
+        console.log(response.data.status);
         setOutcomes(response.data.outcomes);
         setStatus(response.data.status);
       } catch (error) {
@@ -37,10 +37,18 @@ export default function BranchScreen(props) {
     <ScrollView style={globalStyles.content}>
       {status && branch ? (
         <>
-          <Text style={globalStyles.title_1}>Ventas</Text>
+          <Text style={globalStyles.title_1}>Ventas hoy</Text>
           <OrderList />
-          <Text style={globalStyles.title_1}>Gastos</Text>
+          <Text style={globalStyles.title_1}>Gastos hoy</Text>
           <OutcomeList outcomes={outcomes} />
+          <Pressable
+            style={globalStyles.button}
+            onPress={() => {
+              console.log("ir a todos los datos");
+            }}
+          >
+            <Text style={globalStyles.buttonText}>Ver todos los gastos</Text>
+          </Pressable>
         </>
       ) : (
         <Text style={globalStyles.title_1}>No hay datos que mostrar</Text>

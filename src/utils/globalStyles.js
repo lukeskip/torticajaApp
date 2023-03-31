@@ -3,7 +3,8 @@ import { colors } from "./constants";
 export const globalStyles = StyleSheet.create({
   content: {
     padding: 20,
-    marginVertical: 10,
+    marginTop: 70,
+    marginBottom: 20,
   },
   contentCenter: {
     justifyContent: "center",
@@ -60,6 +61,11 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: colors.mainColor,
     marginVertical: 20,
     paddingVertical: 10,
+  },
+  top_right: {
+    position: "absolute",
+    right: 20,
+    top: 20,
   },
   buttonText: {
     textAlign: "center",

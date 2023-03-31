@@ -2,9 +2,7 @@ import { StyleSheet } from "react-native";
 import { colors } from "./constants";
 export const globalStyles = StyleSheet.create({
   content: {
-    padding: 20,
-    marginTop: 70,
-    marginBottom: 20,
+    paddingHorizontal: 20,
   },
   contentCenter: {
     justifyContent: "center",
@@ -28,7 +26,7 @@ export const globalStyles = StyleSheet.create({
   listContent: {},
   item: {
     borderBottomWidth: 1,
-    borderColor: colors.grayDark,
+    borderColor: colors.grayLight,
     borderBottomStyle: "solid",
     flex: 1,
     flexDirection: "row",
@@ -59,19 +57,23 @@ export const globalStyles = StyleSheet.create({
   button: {
     borderRadius: 10,
     backgroundColor: colors.mainColor,
-    marginVertical: 20,
     paddingVertical: 10,
   },
   top_right: {
     position: "absolute",
-    right: 20,
-    top: 20,
+    right: 40,
+    top: 40,
   },
   buttonText: {
     textAlign: "center",
     color: "white",
     fontSize: 18,
     textTransform: "uppercase",
+  },
+  transparentButton: {
+    borderWidth: 1,
+    borderColor: colors.darkGray,
+    padding: 5,
   },
   pill: {
     backgroundColor: colors.mainColor,
@@ -91,8 +93,8 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 10,
   },
   flex: {
-    flex: 1,
     flexDirection: "row",
+    alignItems: "center",
   },
   flexItem: {
     paddingHorizontal: 5,

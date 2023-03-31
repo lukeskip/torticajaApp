@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import DashboardScreen from "../screens/DashboardScreen";
 import BranchScreen from "../screens/BranchScreen";
+import ProductScreen from "../screens/ProductScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import LoginScreen from "../screens/LoginScreen";
 import NavigationTab from "./NavigationTab";
@@ -22,6 +23,13 @@ export default function NavigationStack() {
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="Branch" component={BranchScreen} />
+          <Stack.Screen
+            name="Products"
+            component={ProductScreen}
+            options={{
+              title: "Productos",
+            }}
+          />
         </>
       ) : (
         <Stack.Screen

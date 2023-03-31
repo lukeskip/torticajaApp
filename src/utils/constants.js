@@ -10,4 +10,5 @@ export const colors = {
   secondaryColor: "#8fc121",
   gray: "#999999",
   grayDark: "#636362",
+  grayLight: "#E3E3E3",
 };

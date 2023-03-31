@@ -9,6 +9,7 @@ import CashClosing from "../screens/CashClosing";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { globalStyles } from "../utils/globalStyles";
 import { colors } from "../utils/constants";
+import OrderScreen from "../screens/OrderScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +38,7 @@ export default function NavigationTab() {
       />
       <Tab.Screen
         name="Venta"
-        component={SaleScreen}
+        component={OrderScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <View style={[globalStyles.contentCenter, globalStyles.iconTab]}>

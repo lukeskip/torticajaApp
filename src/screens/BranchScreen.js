@@ -37,15 +37,6 @@ export default function BranchScreen(props) {
     <ScrollView style={globalStyles.content}>
       {status && branch ? (
         <>
-          <Pressable
-            style={globalStyles.button}
-            onPress={() => {
-              navigation.navigate("Settings");
-            }}
-          >
-            <Text>Settings</Text>
-          </Pressable>
-
           <Text style={globalStyles.title_1}>Ventas hoy</Text>
           <OrderList />
           <Text style={globalStyles.title_1}>Gastos hoy</Text>

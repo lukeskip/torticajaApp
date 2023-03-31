@@ -33,6 +33,7 @@ export default function LoginForm() {
       const response = await loginApi(values);
       if (response.token) {
         login(response);
+        console.log(response);
       } else {
         console.log("No autorizado");
       }

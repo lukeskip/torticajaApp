@@ -23,7 +23,7 @@ export default function BranchScreen(props) {
     if (branch) {
       try {
         const response = await getData(API_HOST + "/branches/" + branch, auth);
-        console.log(response.data.status);
+        console.log("load status", response.data.status);
         setOutcomes(response.data.outcomes);
         setStatus(response.data.status);
       } catch (error) {

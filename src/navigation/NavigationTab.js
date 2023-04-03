@@ -27,7 +27,7 @@ export default function NavigationTab() {
       }}
     >
       <Tab.Screen
-        name="Inicio"
+        name="home"
         component={BranchScreen}
         options={{
           tabBarLabel: "Inicio",
@@ -37,7 +37,7 @@ export default function NavigationTab() {
         }}
       />
       <Tab.Screen
-        name="Venta"
+        name="sale"
         component={OrderScreen}
         options={{
           tabBarIcon: ({ color, size }) => (

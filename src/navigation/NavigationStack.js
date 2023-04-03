@@ -28,6 +28,7 @@ export default function NavigationStack() {
             component={ProductScreen}
             options={{
               title: "Productos",
+              headerShown: false,
             }}
           />
         </>

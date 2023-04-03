@@ -8,20 +8,27 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
   },
+  contentMarginTop: {
+    marginTop: 20,
+  },
+  header: {
+    backgroundColor: colors.mainColor,
+    height: 70,
+    marginTop: 40,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+  },
   title_1: {
     fontSize: 20,
     fontWeight: "bold",
-    marginVertical: 20,
   },
   title_2: {
     fontSize: 18,
     fontWeight: "bold",
-    marginVertical: 20,
   },
   title_3: {
     fontSize: 16,
     fontWeight: "bold",
-    marginVertical: 10,
   },
   listContent: {},
   item: {
@@ -69,6 +76,7 @@ export const globalStyles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     textTransform: "uppercase",
+    fontWeight: "bold",
   },
   transparentButton: {
     borderWidth: 1,

@@ -12,21 +12,26 @@ import ProductList from "../components/ProductList";
 import { globalStyles } from "../utils/globalStyles";
 import { colors, API_HOST } from "../utils/constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { getData } from "../api/api-connections";
 
 export default function ProductScreen() {
-  const { auth } = useAuth();
+  const { auth, orderProducts } = useAuth();
   const [products, setProducts] = useState(null);
   const navigation = useNavigation();
+
   const loadInfo = async () => {
     try {
       reponse = await getData(API_HOST + "/orders", auth);
-      console.log(reponse);
       setProducts(reponse.data);
     } catch (error) {
       console.log("orders", error);
     }
+  };
+
+  const getBack = () => {
+    console.log("getting back");
+    !orderProducts ? navigation.navigate("home") : navigation.navigate("sale");
   };
 
   useEffect(() => {
@@ -37,6 +42,20 @@ export default function ProductScreen() {
 
   return (
     <>
+      <View style={globalStyles.header}>
+        <Pressable style={globalStyles.flex} onPress={getBack}>
+          <FontAwesome5 name="arrow-circle-left" size={20} color="white" />
+          <Text
+            style={[
+              globalStyles.flexItem,
+              globalStyles.title_2,
+              { color: "white" },
+            ]}
+          >
+            Regresar
+          </Text>
+        </Pressable>
+      </View>
       <View
         style={[
           globalStyles.flex,

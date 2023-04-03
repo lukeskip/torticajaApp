@@ -34,7 +34,7 @@ export default function BranchScreen(props) {
   const { navigation } = props;
 
   return (
-    <ScrollView style={globalStyles.content}>
+    <ScrollView style={[globalStyles.content, { marginTop: 40 }]}>
       {status && branch ? (
         <>
           <Text style={globalStyles.title_1}>Ventas hoy</Text>

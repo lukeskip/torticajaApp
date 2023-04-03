@@ -40,6 +40,10 @@ export default function ProductScreen() {
     });
   }, [auth]);
 
+  useEffect(() => {
+    console.log(orderProducts);
+  }, [orderProducts]);
+
   return (
     <>
       <View style={globalStyles.header}>

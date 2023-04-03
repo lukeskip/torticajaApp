@@ -17,9 +17,7 @@ export default function OrderScreen() {
   };
 
   const loadOrGo = () => {
-    console.log("loadOrGo", "going");
-
-    if (!orderProducts) {
+    if (orderProducts.length === 0) {
       navigation.navigate("Products");
     }
   };

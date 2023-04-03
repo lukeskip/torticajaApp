@@ -6,7 +6,7 @@ export const AuthContext = createContext({
   branch: undefined,
   login: () => {},
   logout: () => {},
-  orderProducts: undefined,
+  orderProducts: [],
   addProduct: () => {},
 });
 
@@ -26,18 +26,19 @@ export function AuthProvider(props) {
     setAuth(undefined);
   };
 
-  const addProduct = (item) => {
-    if (isOnCart(item.id)) {
-      const product = orderProducts.find(function (found) {
-        return found.id === item.id;
-      });
+  const addProduct = (product) => {
+    if (isOnCart(product.id)) {
+      const productOnCart = orderProducts.findIndex((item) => item.id === 2);
     } else {
-      setOrderProducts([...orderProducts, [item.id]]);
+      setOrderProducts([
+        ...orderProducts,
+        { id: product.id, amount: 1, price: product.price },
+      ]);
     }
   };
 
   const isOnCart = (id) => {
-    let result = orderProducts.some((item) => item.id === id);
+    const result = Object.values(orderProducts).includes(id);
     return result;
   };
 

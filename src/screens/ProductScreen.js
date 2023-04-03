@@ -56,7 +56,7 @@ export default function ProductScreen() {
               { color: "white" },
             ]}
           >
-            Regresar
+            Listo
           </Text>
         </Pressable>
       </View>

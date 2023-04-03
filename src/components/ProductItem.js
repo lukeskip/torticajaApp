@@ -10,6 +10,7 @@ export default function ProductItem(props) {
   return (
     <View style={[globalStyles.item, { justifyContent: "space-between" }]}>
       <Text>{product.label}</Text>
+
       <Pressable
         style={globalStyles.pill}
         onPress={() => {

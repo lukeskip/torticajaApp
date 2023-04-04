@@ -28,17 +28,20 @@ export function AuthProvider(props) {
 
   const addProduct = (product) => {
     if (isOnCart(product.id)) {
-      const productOnCart = orderProducts.findIndex((item) => item.id === 2);
+      const currentProduct = orderProducts.find(function (found) {
+        return found.id === product.id;
+      });
+      console.log(currentProduct);
     } else {
       setOrderProducts([
         ...orderProducts,
-        { id: product.id, amount: 1, price: product.price },
+        { id: product.id, amount: 1, price: product.price, unit: product.unit },
       ]);
     }
   };
 
   const isOnCart = (id) => {
-    const result = Object.values(orderProducts).includes(id);
+    const result = orderProducts.some((item) => item.id === id);
     return result;
   };
 

@@ -25,7 +25,7 @@ export default function OrderScreen() {
   useFocusEffect(
     React.useCallback(() => {
       loadOrGo();
-    }, [])
+    }, [orderProducts])
   );
 
   return (

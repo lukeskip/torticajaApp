@@ -79,7 +79,7 @@ export default function ProductScreen() {
       </View>
       {products ? (
         <ScrollView style={[globalStyles.content, { height: 100 }]}>
-          <ProductList products={products} />
+          <ProductList products={products} edit={true} />
         </ScrollView>
       ) : (
         <ActivityIndicator size="large" style={styles.spinner} color="black" />

@@ -5,20 +5,30 @@ import { globalStyles } from "../utils/globalStyles";
 
 export default function ProductItem(props) {
   const { addProduct } = useAuth();
-  const { product } = props;
+  const { product, edit } = props;
 
   return (
     <View style={[globalStyles.item, { justifyContent: "space-between" }]}>
-      <Text>{product.label}</Text>
-
-      <Pressable
-        style={globalStyles.pill}
-        onPress={() => {
-          addProduct(product);
-        }}
-      >
-        <Text style={{ color: "white" }}>+1</Text>
-      </Pressable>
+      <Text style={{ width: "70%" }}>{product.label}</Text>
+      {edit ? (
+        <Pressable
+          style={globalStyles.pill}
+          onPress={() => {
+            addProduct(product);
+          }}
+        >
+          <Text style={{ color: "white" }}>+1</Text>
+        </Pressable>
+      ) : (
+        <>
+          <View>
+            <Text>{product.price}</Text>
+          </View>
+          <View>
+            <Text>{product.quantity}</Text>
+          </View>
+        </>
+      )}
     </View>
   );
 }

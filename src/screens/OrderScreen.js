@@ -40,6 +40,9 @@ export default function OrderScreen() {
         <Pressable style={globalStyles.button} onPress={goToProducts}>
           <Text style={globalStyles.buttonText}>Agregar Producto</Text>
         </Pressable>
+        <View>
+          <ProductList products={orderProducts} edit={false} />
+        </View>
       </View>
     </>
   );

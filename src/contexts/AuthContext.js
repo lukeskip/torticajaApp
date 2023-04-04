@@ -33,10 +33,7 @@ export function AuthProvider(props) {
       });
       console.log(currentProduct);
     } else {
-      setOrderProducts([
-        ...orderProducts,
-        { id: product.id, amount: 1, price: product.price, unit: product.unit },
-      ]);
+      setOrderProducts([...orderProducts, { ...product, quantity: 1 }]);
     }
   };
 

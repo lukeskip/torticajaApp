@@ -4,9 +4,14 @@ import ProductItem from "./ProductItem";
 import useAuth from "../hooks/useAuth";
 
 export default function ProductList(props) {
-  const { products } = props;
+  const { products, edit } = props;
 
   return products.map((product) => (
-    <ProductItem product={product} key={product.id} />
+    <ProductItem
+      key={product.id}
+      product={product}
+      key={product.id}
+      edit={edit}
+    />
   ));
 }

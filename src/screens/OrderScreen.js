@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { API_HOST } from "../utils/constants";
@@ -30,20 +30,22 @@ export default function OrderScreen() {
 
   return (
     <>
-      <View
-        style={[
-          globalStyles.content,
-          globalStyles.contentMarginTop,
-          globalStyles.contentCenter,
-        ]}
-      >
+      <View style={[globalStyles.content, { marginTop: 40 }]}>
         <Pressable style={globalStyles.button} onPress={goToProducts}>
           <Text style={globalStyles.buttonText}>Agregar Producto</Text>
         </Pressable>
+      </View>
+      <ScrollView
+        contentContainerStyle={[
+          globalStyles.content,
+          globalStyles.contentMarginTop,
+          // globalStyles.contentCenter,
+        ]}
+      >
         <View>
           <ProductList products={orderProducts} edit={false} />
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }

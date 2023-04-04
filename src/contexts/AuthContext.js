@@ -28,12 +28,19 @@ export function AuthProvider(props) {
 
   const addProduct = (product) => {
     if (isOnCart(product.id)) {
-      const currentProduct = orderProducts.find(function (found) {
+      const newProducts = orderProducts;
+      const currentProduct = newProducts.find(function (found) {
         return found.id === product.id;
       });
-      console.log(currentProduct);
+
+      if (currentProduct.unit !== "piece") {
+        parseFloat(product.amount) + parseFloat(currentProduct.amount);
+      } else {
+        currentProduct.amount += 1;
+      }
+      setOrderProducts([...newProducts]);
     } else {
-      setOrderProducts([...orderProducts, { ...product, quantity: 1 }]);
+      setOrderProducts([...orderProducts, { ...product, amount: 1 }]);
     }
   };
 

@@ -25,7 +25,7 @@ export default function ProductItem(props) {
             <Text>{product.price}</Text>
           </View>
           <View>
-            <Text>{product.quantity}</Text>
+            <Text>x{product.amount}</Text>
           </View>
         </>
       )}

@@ -10,23 +10,13 @@ import useAuth from "../hooks/useAuth";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function OrderScreen() {
-  const { auth, orderProducts } = useAuth();
+  const { auth, orderProducts, emptyCart } = useAuth();
   const navigation = useNavigation();
   const goToProducts = () => {
     navigation.navigate("Products");
   };
 
-  const loadOrGo = () => {
-    if (orderProducts.length === 0) {
-      navigation.navigate("Products");
-    }
-  };
-
-  useFocusEffect(
-    React.useCallback(() => {
-      loadOrGo();
-    }, [orderProducts])
-  );
+  useFocusEffect(React.useCallback(() => {}, [orderProducts]));
 
   return (
     <>
@@ -39,7 +29,7 @@ export default function OrderScreen() {
             globalStyles.buttonCancel,
             { width: 50, marginRight: 10 },
           ]}
-          onPress={goToProducts}
+          onPress={emptyCart}
         >
           <FontAwesome5
             name="trash-alt"

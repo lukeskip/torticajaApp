@@ -12,6 +12,7 @@ export const AuthContext = createContext({
   setProductModal: () => {},
   productModal: undefined,
   setIsOpen: () => {},
+  emptyCart: () => {},
 });
 
 export function AuthProvider(props) {
@@ -69,6 +70,10 @@ export function AuthProvider(props) {
     return result;
   };
 
+  const emptyCart = () => {
+    setOrderProducts([]);
+  };
+
   const openModal = (product) => {
     setIsOpen(!isOpen);
     setProductModal(product);
@@ -86,6 +91,7 @@ export function AuthProvider(props) {
     setIsOpen,
     setProductModal,
     productModal,
+    emptyCart,
   };
 
   return (

@@ -8,6 +8,7 @@ export const AuthContext = createContext({
   logout: () => {},
   orderProducts: [],
   addProduct: () => {},
+  filterProducts: () => {},
 });
 
 export function AuthProvider(props) {
@@ -16,6 +17,7 @@ export function AuthProvider(props) {
   const [role, setRole] = useState();
   const [branch, setBranch] = useState();
   const [orderProducts, setOrderProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const login = (userData) => {
     setAuth(userData.token);
     setRole(userData.role);
@@ -49,6 +51,14 @@ export function AuthProvider(props) {
     return result;
   };
 
+  const filterProducts = (text) => {
+    const newProducts = orderProducts.filter((item) =>
+      item.label.toLowerCase().includes(text.toLowerCase())
+    );
+    console.log("filtered products", newProducts);
+    setFilteredProducts({ ...newProducts });
+  };
+
   const valueContext = {
     auth,
     role,
@@ -57,6 +67,7 @@ export function AuthProvider(props) {
     logout,
     orderProducts,
     addProduct,
+    filterProducts,
   };
 
   return (

@@ -16,7 +16,7 @@ import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { getData } from "../api/api-connections";
 
 export default function ProductScreen() {
-  const { auth, orderProducts } = useAuth();
+  const { auth, orderProducts, filterProducts, filteredProducts } = useAuth();
   const [products, setProducts] = useState(null);
   const navigation = useNavigation();
 
@@ -41,8 +41,8 @@ export default function ProductScreen() {
   }, [auth]);
 
   useEffect(() => {
-    console.log(orderProducts);
-  }, [orderProducts]);
+    console.log(filteredProducts);
+  }, [filteredProducts]);
 
   return (
     <>
@@ -70,6 +70,9 @@ export default function ProductScreen() {
         <TextInput
           placeholder="Buscar"
           style={[globalStyles.textInput, { width: "70%" }]}
+          onChangeText={(text) => {
+            filterProducts(text);
+          }}
         />
         <View style={[globalStyles.flexItem]}>
           <Pressable style={globalStyles.transparentButton}>

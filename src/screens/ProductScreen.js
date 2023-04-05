@@ -18,9 +18,8 @@ import { getData } from "../api/api-connections";
 import ProductFormModal from "../components/ProductFormModal";
 
 export default function ProductScreen() {
-  const { auth, orderProducts } = useAuth();
+  const { auth, orderProducts, isOpen, setIsOpen } = useAuth();
   const [products, setProducts] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(null);
   const navigation = useNavigation();
 
@@ -64,7 +63,6 @@ export default function ProductScreen() {
   return (
     <>
       <View style={globalStyles.header}>
-        {/* <Button title="abrir" onPress={() => setIsOpen(!isOpen)} /> */}
         <Pressable style={globalStyles.flex} onPress={getBack}>
           <FontAwesome5 name="arrow-circle-left" size={20} color="white" />
           <Text

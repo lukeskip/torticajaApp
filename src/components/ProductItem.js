@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { globalStyles } from "../utils/globalStyles";
 
 export default function ProductItem(props) {
-  const { addProduct } = useAuth();
+  const { addProduct, isOpen, setIsOpen } = useAuth();
   const { product, edit } = props;
 
   return (

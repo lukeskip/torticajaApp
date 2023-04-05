@@ -8,6 +8,8 @@ export const AuthContext = createContext({
   logout: () => {},
   orderProducts: [],
   addProduct: () => {},
+  isOpen: undefined,
+  setIsOpen: () => {},
 });
 
 export function AuthProvider(props) {
@@ -16,6 +18,7 @@ export function AuthProvider(props) {
   const [role, setRole] = useState();
   const [branch, setBranch] = useState();
   const [orderProducts, setOrderProducts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const login = (userData) => {
     setAuth(userData.token);
@@ -35,13 +38,19 @@ export function AuthProvider(props) {
       });
 
       if (currentProduct.unit !== "piece") {
-        parseFloat(product.amount) + parseFloat(currentProduct.amount);
+        setIsOpen(!isOpen);
+        // parseFloat(product.amount) + parseFloat(currentProduct.amount);
       } else {
         currentProduct.amount += 1;
+        setOrderProducts([...newProducts]);
       }
-      setOrderProducts([...newProducts]);
     } else {
-      setOrderProducts([...orderProducts, { ...product, amount: 1 }]);
+      if (product.unit !== "piece") {
+        setIsOpen(!isOpen);
+        // parseFloat(product.amount) + parseFloat(currentProduct.amount);
+      } else {
+        setOrderProducts([...orderProducts, { ...product, amount: 1 }]);
+      }
     }
   };
 
@@ -58,6 +67,8 @@ export function AuthProvider(props) {
     logout,
     orderProducts,
     addProduct,
+    isOpen,
+    setIsOpen,
   };
 
   return (

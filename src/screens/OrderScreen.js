@@ -30,8 +30,28 @@ export default function OrderScreen() {
 
   return (
     <>
-      <View style={[globalStyles.content, { marginTop: 40 }]}>
-        <Pressable style={globalStyles.button} onPress={goToProducts}>
+      <View
+        style={[globalStyles.content, globalStyles.flex, { marginTop: 40 }]}
+      >
+        <Pressable
+          style={[
+            globalStyles.button,
+            globalStyles.buttonCancel,
+            { width: 50, marginRight: 10 },
+          ]}
+          onPress={goToProducts}
+        >
+          <FontAwesome5
+            name="trash-alt"
+            size={20}
+            color="white"
+            style={{ textAlign: "center" }}
+          />
+        </Pressable>
+        <Pressable
+          style={[globalStyles.button, globalStyles.buttonSuccess, { flex: 1 }]}
+          onPress={goToProducts}
+        >
           <Text style={globalStyles.buttonText}>Terminar Orden</Text>
         </Pressable>
       </View>

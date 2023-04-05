@@ -17,6 +17,9 @@ export const globalStyles = StyleSheet.create({
     marginTop: 40,
     paddingVertical: 20,
     paddingHorizontal: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   title_1: {
     fontSize: 20,
@@ -69,6 +72,9 @@ export const globalStyles = StyleSheet.create({
   buttonCancel: {
     backgroundColor: colors.error,
   },
+  buttonSuccess: {
+    backgroundColor: colors.success,
+  },
   top_right: {
     position: "absolute",
     right: 40,
@@ -107,6 +113,7 @@ export const globalStyles = StyleSheet.create({
   flex: {
     flexDirection: "row",
     flexWrap: "wrap",
+    alignItems: "center",
     justifyContent: "space-between",
   },
   flexItem: {

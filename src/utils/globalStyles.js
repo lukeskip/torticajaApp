@@ -66,6 +66,9 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: colors.mainColor,
     paddingVertical: 10,
   },
+  buttonCancel: {
+    backgroundColor: colors.error,
+  },
   top_right: {
     position: "absolute",
     right: 40,
@@ -103,7 +106,8 @@ export const globalStyles = StyleSheet.create({
   },
   flex: {
     flexDirection: "row",
-    alignItems: "center",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   flexItem: {
     paddingHorizontal: 5,

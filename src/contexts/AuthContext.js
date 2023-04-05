@@ -9,6 +9,8 @@ export const AuthContext = createContext({
   orderProducts: [],
   addProduct: () => {},
   isOpen: undefined,
+  setProductModal: () => {},
+  productModal: undefined,
   setIsOpen: () => {},
 });
 
@@ -19,6 +21,7 @@ export function AuthProvider(props) {
   const [branch, setBranch] = useState();
   const [orderProducts, setOrderProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [productModal, setProductModal] = useState([]);
 
   const login = (userData) => {
     setAuth(userData.token);
@@ -30,7 +33,8 @@ export function AuthProvider(props) {
     setAuth(undefined);
   };
 
-  const addProduct = (product) => {
+  const addProduct = (product, amount = 0) => {
+    console.log("se trato de agregar el producto", product);
     if (isOnCart(product.id)) {
       const newProducts = orderProducts;
       const currentProduct = newProducts.find(function (found) {
@@ -38,16 +42,22 @@ export function AuthProvider(props) {
       });
 
       if (currentProduct.unit !== "piece") {
-        setIsOpen(!isOpen);
-        // parseFloat(product.amount) + parseFloat(currentProduct.amount);
+        openModal(product);
+        currentProduct.amount =
+          parseFloat(amount) + parseFloat(currentProduct.amount);
+        if (amount > 0) {
+          setOrderProducts([...newProducts]);
+        }
       } else {
         currentProduct.amount += 1;
         setOrderProducts([...newProducts]);
       }
     } else {
       if (product.unit !== "piece") {
-        setIsOpen(!isOpen);
-        // parseFloat(product.amount) + parseFloat(currentProduct.amount);
+        openModal(product);
+        if (amount > 0) {
+          setOrderProducts([...orderProducts, { ...product, amount: amount }]);
+        }
       } else {
         setOrderProducts([...orderProducts, { ...product, amount: 1 }]);
       }
@@ -57,6 +67,11 @@ export function AuthProvider(props) {
   const isOnCart = (id) => {
     const result = orderProducts.some((item) => item.id === id);
     return result;
+  };
+
+  const openModal = (product) => {
+    setIsOpen(!isOpen);
+    setProductModal(product);
   };
 
   const valueContext = {
@@ -69,6 +84,8 @@ export function AuthProvider(props) {
     addProduct,
     isOpen,
     setIsOpen,
+    setProductModal,
+    productModal,
   };
 
   return (

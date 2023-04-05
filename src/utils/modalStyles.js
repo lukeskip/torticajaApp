@@ -3,7 +3,7 @@ import { colors } from "./constants";
 export const modalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
     paddingHorizontal: 10,
     paddingVertical: 20,
   },

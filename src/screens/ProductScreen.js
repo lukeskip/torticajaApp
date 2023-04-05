@@ -16,14 +16,16 @@ import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { getData } from "../api/api-connections";
 
 export default function ProductScreen() {
-  const { auth, orderProducts, filterProducts, filteredProducts } = useAuth();
+  const { auth, orderProducts } = useAuth();
   const [products, setProducts] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState(null);
   const navigation = useNavigation();
 
   const loadInfo = async () => {
     try {
       reponse = await getData(API_HOST + "/orders", auth);
       setProducts(reponse.data);
+      setFilteredProducts(reponse.data);
     } catch (error) {
       console.log("orders", error);
     }
@@ -31,7 +33,17 @@ export default function ProductScreen() {
 
   const getBack = () => {
     console.log("getting back");
-    !orderProducts ? navigation.navigate("home") : navigation.navigate("sale");
+    orderProducts.length === 0
+      ? navigation.navigate("home")
+      : navigation.navigate("sale");
+  };
+
+  const filterProducts = (text) => {
+    const newProducts = products.filter((item) =>
+      item.label.toLowerCase().includes(text.toLowerCase())
+    );
+    console.log("filtered products", newProducts);
+    setFilteredProducts(newProducts);
   };
 
   useEffect(() => {
@@ -41,7 +53,9 @@ export default function ProductScreen() {
   }, [auth]);
 
   useEffect(() => {
-    console.log(filteredProducts);
+    navigation.addListener("focus", async () => {
+      setFilteredProducts(products);
+    });
   }, [filteredProducts]);
 
   return (
@@ -80,9 +94,9 @@ export default function ProductScreen() {
           </Pressable>
         </View>
       </View>
-      {products ? (
+      {filteredProducts ? (
         <ScrollView style={[globalStyles.content, { height: 100 }]}>
-          <ProductList products={products} edit={true} />
+          <ProductList products={filteredProducts} edit={true} />
         </ScrollView>
       ) : (
         <ActivityIndicator size="large" style={styles.spinner} color="black" />

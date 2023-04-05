@@ -37,7 +37,7 @@ export default function ProductScreen() {
     console.log("getting back");
     orderProducts.length === 0
       ? navigation.navigate("home")
-      : navigation.navigate("sale");
+      : navigation.navigate("Order");
   };
 
   const filterProducts = (text) => {

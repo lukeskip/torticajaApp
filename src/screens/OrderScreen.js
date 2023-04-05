@@ -32,7 +32,7 @@ export default function OrderScreen() {
     <>
       <View style={[globalStyles.content, { marginTop: 40 }]}>
         <Pressable style={globalStyles.button} onPress={goToProducts}>
-          <Text style={globalStyles.buttonText}>Agregar Producto</Text>
+          <Text style={globalStyles.buttonText}>Terminar Orden</Text>
         </Pressable>
       </View>
       <ScrollView

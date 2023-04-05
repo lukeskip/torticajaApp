@@ -4,12 +4,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DashboardScreen from "../screens/DashboardScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import BranchScreen from "../screens/BranchScreen";
-import SaleScreen from "../screens/SaleScreen";
+
 import CashClosing from "../screens/CashClosing";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { globalStyles } from "../utils/globalStyles";
 import { colors } from "../utils/constants";
-import OrderScreen from "../screens/OrderScreen";
+import ProductScreen from "../screens/ProductScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,8 +38,9 @@ export default function NavigationTab() {
       />
       <Tab.Screen
         name="sale"
-        component={OrderScreen}
+        component={ProductScreen}
         options={{
+          tabBarLabel: "Venta",
           tabBarIcon: ({ color, size }) => (
             <View style={[globalStyles.contentCenter, globalStyles.iconTab]}>
               <Icon name="cash-register" color="white" size={20} />

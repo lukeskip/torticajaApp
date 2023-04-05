@@ -1,9 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import DashboardScreen from "../screens/DashboardScreen";
-import BranchScreen from "../screens/BranchScreen";
-import ProductScreen from "../screens/ProductScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+import OrderScreen from "../screens/OrderScreen";
 import LoginScreen from "../screens/LoginScreen";
 import NavigationTab from "./NavigationTab";
 import useAuth from "../hooks/useAuth";
@@ -20,15 +18,11 @@ export default function NavigationStack() {
             component={NavigationTab}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="Dashboard" component={DashboardScreen} />
-          <Stack.Screen name="Settings" component={SettingsScreen} />
-          <Stack.Screen name="Branch" component={BranchScreen} />
           <Stack.Screen
-            name="Products"
-            component={ProductScreen}
+            name="Order"
+            component={OrderScreen}
             options={{
-              title: "Productos",
-              headerShown: false,
+              title: "Generando Orden",
             }}
           />
         </>

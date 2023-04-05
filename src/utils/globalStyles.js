@@ -97,6 +97,7 @@ export const globalStyles = StyleSheet.create({
     height: 40,
     marginVertical: 12,
     borderWidth: 1,
+    borderColor: colors.gray,
     padding: 10,
     borderRadius: 10,
   },

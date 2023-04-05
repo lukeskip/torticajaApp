@@ -5,6 +5,7 @@ import {
   Pressable,
   ScrollView,
   ActivityIndicator,
+  Button,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
@@ -14,10 +15,12 @@ import { colors, API_HOST } from "../utils/constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { getData } from "../api/api-connections";
+import ProductFormModal from "../components/ProductFormModal";
 
 export default function ProductScreen() {
   const { auth, orderProducts } = useAuth();
   const [products, setProducts] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(null);
   const navigation = useNavigation();
 
@@ -61,6 +64,7 @@ export default function ProductScreen() {
   return (
     <>
       <View style={globalStyles.header}>
+        {/* <Button title="abrir" onPress={() => setIsOpen(!isOpen)} /> */}
         <Pressable style={globalStyles.flex} onPress={getBack}>
           <FontAwesome5 name="arrow-circle-left" size={20} color="white" />
           <Text
@@ -101,6 +105,8 @@ export default function ProductScreen() {
       ) : (
         <ActivityIndicator size="large" style={styles.spinner} color="black" />
       )}
+
+      <ProductFormModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 }

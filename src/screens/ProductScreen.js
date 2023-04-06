@@ -15,7 +15,7 @@ import { globalStyles } from "../utils/globalStyles";
 import { colors, API_HOST } from "../utils/constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import * as Animatable from "react-native-animatable";
+
 import { getData } from "../api/api-connections";
 import ProductFormModal from "../components/ProductFormModal";
 
@@ -24,14 +24,7 @@ export default function ProductScreen() {
   const [products, setProducts] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(null);
   const navigation = useNavigation();
-  handleViewRef = (ref) => (view = ref);
 
-  bounce = () =>
-    view
-      .bounce(800)
-      .then((endState) =>
-        console.log(endState.finished ? "bounce finished" : "bounce cancelled")
-      );
   const loadInfo = async () => {
     try {
       reponse = await getData(API_HOST + "/orders", auth);
@@ -71,19 +64,13 @@ export default function ProductScreen() {
   return (
     <>
       <View style={globalStyles.header}>
-        <Pressable
-          onPress={() =>
-            // navigation.navigate("Home")
-            bounce()
-          }
-        >
+        <Pressable onPress={() => navigation.navigate("Home")}>
           <Text>
             <FontAwesome5 name="arrow-circle-left" size={20} color="white" />
           </Text>
         </Pressable>
         <Pressable style={globalStyles.flex} onPress={getBack}>
-          <Animatable.Text
-            ref={handleViewRef}
+          <Text
             style={[
               globalStyles.flexItem,
               globalStyles.title_2,
@@ -91,7 +78,7 @@ export default function ProductScreen() {
             ]}
           >
             Listo
-          </Animatable.Text>
+          </Text>
         </Pressable>
       </View>
       <View

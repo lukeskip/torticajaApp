@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from "react-native";
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { globalStyles } from "../utils/globalStyles";
 
@@ -14,6 +14,7 @@ export default function ProductItem(props) {
         <Pressable
           style={globalStyles.pill}
           onPress={() => {
+            startAnimation();
             addProduct(product);
           }}
         >

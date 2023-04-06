@@ -1,6 +1,7 @@
-import { View, Text, Pressable, ScrollView } from "react-native";
-import React, { useState } from "react";
+import { View, Text, Pressable, ScrollView, Animated } from "react-native";
+import React, { useState, useEffect } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
+
 import { API_HOST } from "../utils/constants";
 import { getData } from "../api/api-connections";
 import { globalStyles } from "../utils/globalStyles";
@@ -10,13 +11,13 @@ import useAuth from "../hooks/useAuth";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function OrderScreen() {
-  const { auth, orderProducts, emptyCart } = useAuth();
+  const { auth, orderProducts, emptyCart, cartTotal } = useAuth();
   const navigation = useNavigation();
   const goToProducts = () => {
     navigation.navigate("Products");
   };
 
-  useFocusEffect(React.useCallback(() => {}, [orderProducts]));
+  useEffect(() => {}, [cartTotal, orderProducts]);
 
   return (
     <>
@@ -42,7 +43,9 @@ export default function OrderScreen() {
           style={[globalStyles.button, globalStyles.buttonSuccess, { flex: 1 }]}
           onPress={goToProducts}
         >
-          <Text style={globalStyles.buttonText}>Terminar Orden</Text>
+          <Text style={globalStyles.buttonText} animation="zoomInUp">
+            Terminar Orden (${cartTotal})
+          </Text>
         </Pressable>
       </View>
       <ScrollView

@@ -6,6 +6,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Button,
+  Animated,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
@@ -14,6 +15,7 @@ import { globalStyles } from "../utils/globalStyles";
 import { colors, API_HOST } from "../utils/constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import * as Animatable from "react-native-animatable";
 import { getData } from "../api/api-connections";
 import ProductFormModal from "../components/ProductFormModal";
 
@@ -22,7 +24,14 @@ export default function ProductScreen() {
   const [products, setProducts] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(null);
   const navigation = useNavigation();
+  handleViewRef = (ref) => (view = ref);
 
+  bounce = () =>
+    view
+      .bounce(800)
+      .then((endState) =>
+        console.log(endState.finished ? "bounce finished" : "bounce cancelled")
+      );
   const loadInfo = async () => {
     try {
       reponse = await getData(API_HOST + "/orders", auth);
@@ -44,7 +53,6 @@ export default function ProductScreen() {
     const newProducts = products.filter((item) =>
       item.label.toLowerCase().includes(text.toLowerCase())
     );
-    console.log("filtered products", newProducts);
     setFilteredProducts(newProducts);
   };
 
@@ -63,13 +71,19 @@ export default function ProductScreen() {
   return (
     <>
       <View style={globalStyles.header}>
-        <Pressable onPress={() => navigation.navigate("Home")}>
+        <Pressable
+          onPress={() =>
+            // navigation.navigate("Home")
+            bounce()
+          }
+        >
           <Text>
             <FontAwesome5 name="arrow-circle-left" size={20} color="white" />
           </Text>
         </Pressable>
         <Pressable style={globalStyles.flex} onPress={getBack}>
-          <Text
+          <Animatable.Text
+            ref={handleViewRef}
             style={[
               globalStyles.flexItem,
               globalStyles.title_2,
@@ -77,7 +91,7 @@ export default function ProductScreen() {
             ]}
           >
             Listo
-          </Text>
+          </Animatable.Text>
         </Pressable>
       </View>
       <View

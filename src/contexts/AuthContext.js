@@ -4,6 +4,7 @@ export const AuthContext = createContext({
   auth: undefined,
   role: undefined,
   branch: undefined,
+  cartTotal: 0,
   login: () => {},
   logout: () => {},
   orderProducts: [],
@@ -23,6 +24,7 @@ export function AuthProvider(props) {
   const [orderProducts, setOrderProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [productModal, setProductModal] = useState([]);
+  const [cartTotal, setCartTotal] = useState([]);
 
   const login = (userData) => {
     setAuth(userData.token);
@@ -35,7 +37,6 @@ export function AuthProvider(props) {
   };
 
   const addProduct = (product, amount = 0) => {
-    console.log("se trato de agregar el producto", product);
     if (isOnCart(product.id)) {
       const newProducts = orderProducts;
       const currentProduct = newProducts.find(function (found) {
@@ -63,6 +64,8 @@ export function AuthProvider(props) {
         setOrderProducts([...orderProducts, { ...product, amount: 1 }]);
       }
     }
+
+    calculateTotal();
   };
 
   const isOnCart = (id) => {
@@ -72,6 +75,7 @@ export function AuthProvider(props) {
 
   const emptyCart = () => {
     setOrderProducts([]);
+    setCartTotal(0);
   };
 
   const openModal = (product) => {
@@ -79,10 +83,18 @@ export function AuthProvider(props) {
     setProductModal(product);
   };
 
+  const calculateTotal = () => {
+    let sum = orderProducts.reduce(function (prev, current) {
+      return prev + +(current.price * current.amount);
+    }, 0);
+    setCartTotal(sum);
+  };
+
   const valueContext = {
     auth,
     role,
     branch,
+    cartTotal,
     login,
     logout,
     orderProducts,

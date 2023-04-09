@@ -87,7 +87,7 @@ export function AuthProvider(props) {
     let sum = orderProducts.reduce(function (prev, current) {
       return prev + +(current.price * current.amount);
     }, 0);
-    setCartTotal(sum);
+    setCartTotal(sum.toFixed(2));
   };
 
   const valueContext = {

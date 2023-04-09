@@ -32,7 +32,7 @@ export async function loginApi(authData) {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credencials": "false",
-        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Headers":
           "Origin,OPTIONS,X-Requested-With,Content-type,Accept",
       },
@@ -42,5 +42,27 @@ export async function loginApi(authData) {
     return result;
   } catch (error) {
     throw error;
+  }
+}
+
+export async function sendData(url, data) {
+  try {
+    const response = await fetch(API_HOST + url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credencials": "false",
+        "Access-Control-Allow-Methods": "POST",
+        "Access-Control-Allow-Headers":
+          "Origin,OPTIONS,X-Requested-With,Content-type,Accept",
+      },
+      body: data,
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
   }
 }

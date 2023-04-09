@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext({
   auth: undefined,
@@ -18,18 +19,17 @@ export const AuthContext = createContext({
 
 export function AuthProvider(props) {
   const { children } = props;
-  const [auth, setAuth] = useState();
-  const [role, setRole] = useState();
-  const [branch, setBranch] = useState();
   const [orderProducts, setOrderProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [productModal, setProductModal] = useState([]);
   const [cartTotal, setCartTotal] = useState([]);
 
-  const login = (userData) => {
-    setAuth(userData.token);
-    setRole(userData.role);
-    setBranch(userData.branch);
+  const login = async (userData) => {
+    try {
+      await AsyncStorage.setItem("auth", userData.token);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const logout = () => {
@@ -91,9 +91,6 @@ export function AuthProvider(props) {
   };
 
   const valueContext = {
-    auth,
-    role,
-    branch,
     cartTotal,
     login,
     logout,

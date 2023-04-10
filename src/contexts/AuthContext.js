@@ -2,7 +2,8 @@ import React, { useState, useEffect, createContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext({
-  authStatus: false,
+  checkLoging: () => {},
+  auth: undefined,
   role: undefined,
   branch: undefined,
   cartTotal: 0,
@@ -23,26 +24,49 @@ export function AuthProvider(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [productModal, setProductModal] = useState([]);
   const [cartTotal, setCartTotal] = useState([]);
-  const [authStatus, setAuthStatus] = useState(false);
+  const [auth, setAuth] = useState(null);
+  const [role, setRole] = useState(null);
+  const [branch, setBranch] = useState(null);
 
   const login = async (userData) => {
-    try {
-      await AsyncStorage.multiSet([
-        ["auth", userData.token],
-        ["branch", userData.branch.toString()],
-        ["role", userData.role],
-      ]).then(() => {
-        console.log("Auth Seteado");
-        setAuthStatus(true);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    await AsyncStorage.multiSet([
+      ["auth", userData.token],
+      ["branch", userData.branch.toString()],
+      ["role", userData.role],
+    ]).then(() => {
+      setAuth(userData.token);
+      setBranch(userData.branch);
+      setRole(userData.role);
+    });
+  };
+
+  const checkLoging = () => {
+    AsyncStorage.getItem("auth").then((value) => {
+      if (value) {
+        console.log("asjkjansd");
+        setAuth(value);
+      }
+    });
+
+    AsyncStorage.getItem("branch").then((value) => {
+      if (value) {
+        setBranch(value);
+      }
+    });
+
+    AsyncStorage.getItem("role").then((value) => {
+      if (value) {
+        setAuth(value);
+      }
+    });
   };
 
   const logout = async () => {
     await AsyncStorage.multiRemove(["auth", "branch", "role"]).then(() => {
-      setAuthStatus(false);
+      console.log("logout");
+      setAuth(null);
+      setBranch(null);
+      setAuth(null);
     });
   };
 
@@ -101,7 +125,10 @@ export function AuthProvider(props) {
   };
 
   const valueContext = {
-    authStatus,
+    checkLoging,
+    branch,
+    role,
+    auth,
     cartTotal,
     login,
     logout,

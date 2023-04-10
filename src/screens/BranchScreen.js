@@ -9,8 +9,7 @@ import useAuth from "../hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function BranchScreen(props) {
-  const { authStatus, logout } = useAuth();
-  [branch, setBranch] = useState();
+  const { auth, branch, logout } = useAuth();
   [incomes, setIncomes] = useState([]);
   [outcomes, setOutcomes] = useState([]);
   [status, setStatus] = useState(false);
@@ -22,22 +21,20 @@ export default function BranchScreen(props) {
   }, [branch]);
 
   useEffect(() => {
-    console.log(authStatus);
-  }, [authStatus]);
+    console.log(auth);
+  }, [auth]);
 
   const loadItems = async () => {
-    AsyncStorage.getItem("branch", async (error, result) => {
-      console.log(result);
+    if (branch) {
       try {
         const response = await getData(API_HOST + "/branches/" + result, auth);
         console.log("load status", response.data.status);
         setOutcomes(response.data.outcomes);
         setStatus(response.data.status);
-        setBranch(result);
       } catch (error) {
         console.log(error);
       }
-    });
+    }
   };
   const { navigation } = props;
 

@@ -10,15 +10,17 @@ import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 export default function NavigationStack() {
   const Stack = createStackNavigator();
-  const { authStatus } = useAuth();
+  const { auth, checkLoging } = useAuth();
+
+  useEffect(() => {}, [auth]);
 
   useEffect(() => {
-    console.log("authStatus", authStatus);
-  }, [authStatus]);
+    checkLoging();
+  }, []);
 
   return (
     <Stack.Navigator initialRouteName="Tab">
-      {authStatus ? (
+      {auth ? (
         <>
           <Stack.Screen
             name="Tab"

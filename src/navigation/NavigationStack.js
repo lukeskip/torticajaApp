@@ -6,27 +6,19 @@ import LoginScreen from "../screens/LoginScreen";
 import NavigationTab from "./NavigationTab";
 import useAuth from "../hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 export default function NavigationStack() {
   const Stack = createStackNavigator();
-  const [auth, setAuth] = useState(null);
-  const checkAuth = async () => {
-    authStoraged = await AsyncStorage.getItem("auth");
-    console.log(authStoraged);
-    if (authStoraged !== null) {
-      setAuth(authStoraged);
-    }
-  };
+  const { authStatus } = useAuth();
 
   useEffect(() => {
-    checkAuth();
-  }, []);
-  useEffect(() => {
-    console.log(auth);
-  }, [auth]);
+    console.log("authStatus", authStatus);
+  }, [authStatus]);
+
   return (
     <Stack.Navigator initialRouteName="Tab">
-      {auth ? (
+      {authStatus ? (
         <>
           <Stack.Screen
             name="Tab"

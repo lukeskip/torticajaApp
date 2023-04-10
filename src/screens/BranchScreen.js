@@ -6,9 +6,11 @@ import OutcomeList from "../components/OutcomeList";
 import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
 import useAuth from "../hooks/useAuth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function BranchScreen(props) {
-  const { auth, branch } = useAuth();
+  const { authStatus, logout } = useAuth();
+  [branch, setBranch] = useState();
   [incomes, setIncomes] = useState([]);
   [outcomes, setOutcomes] = useState([]);
   [status, setStatus] = useState(false);
@@ -19,23 +21,29 @@ export default function BranchScreen(props) {
     })();
   }, [branch]);
 
+  useEffect(() => {
+    console.log(authStatus);
+  }, [authStatus]);
+
   const loadItems = async () => {
-    if (branch) {
+    AsyncStorage.getItem("branch", async (error, result) => {
+      console.log(result);
       try {
-        const response = await getData(API_HOST + "/branches/" + branch, auth);
+        const response = await getData(API_HOST + "/branches/" + result, auth);
         console.log("load status", response.data.status);
         setOutcomes(response.data.outcomes);
         setStatus(response.data.status);
+        setBranch(result);
       } catch (error) {
         console.log(error);
       }
-    }
+    });
   };
   const { navigation } = props;
 
   return (
     <ScrollView style={[globalStyles.content, { marginTop: 40 }]}>
-      {status && branch ? (
+      {branch ? (
         <>
           <Text style={globalStyles.title_1}>Ventas hoy</Text>
           <OrderList />
@@ -53,6 +61,9 @@ export default function BranchScreen(props) {
       ) : (
         <Text style={globalStyles.title_1}>No hay datos que mostrar</Text>
       )}
+      <Pressable style={globalStyles.button} onPress={logout}>
+        <Text style={globalStyles.buttonText}>Salir</Text>
+      </Pressable>
     </ScrollView>
   );
 }

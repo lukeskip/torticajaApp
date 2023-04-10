@@ -11,7 +11,7 @@ export default function DashboardScreen(props) {
   [incomes, setIncomes] = useState([]);
   [outcomes, setOutcomes] = useState([]);
   [status, setStatus] = useState(false);
-  const { auth } = useAuth();
+  const { auth, logout } = useAuth();
 
   useEffect(() => {
     (async () => {
@@ -40,7 +40,7 @@ export default function DashboardScreen(props) {
           <OutcomeList outcomes={outcomes} />
         </>
       ) : (
-        <Text style={globalStyles.title_1}>No hay datos que mostrar</Text>
+        <Text style={globalStyles.title_1}>No hay datos que mostrara</Text>
       )}
     </ScrollView>
   );

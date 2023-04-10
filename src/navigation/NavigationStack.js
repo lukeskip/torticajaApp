@@ -3,10 +3,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DashboardScreen from "../screens/DashboardScreen";
 import OrderScreen from "../screens/OrderScreen";
 import LoginScreen from "../screens/LoginScreen";
+import BarCodeScanScreen from "../screens/BarCodeScanScreen";
 import NavigationTab from "./NavigationTab";
 import useAuth from "../hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default function NavigationStack() {
   const Stack = createStackNavigator();
@@ -32,6 +34,13 @@ export default function NavigationStack() {
             component={OrderScreen}
             options={{
               title: "Generando Orden",
+            }}
+          />
+          <Stack.Screen
+            name="scan"
+            component={BarCodeScanScreen}
+            options={{
+              title: "Escaneadno producto",
             }}
           />
         </>

@@ -96,7 +96,10 @@ export default function ProductScreen() {
           }}
         />
         <View style={[globalStyles.flexItem]}>
-          <Pressable style={globalStyles.transparentButton}>
+          <Pressable
+            style={globalStyles.transparentButton}
+            onPress={() => navigation.navigate("scan")}
+          >
             <FontAwesome5 name="barcode" color={colors.darkGray} size={20} />
           </Pressable>
         </View>

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { colors } from "./constants";
 export const globalStyles = StyleSheet.create({
   content: {
@@ -133,5 +133,8 @@ export const globalStyles = StyleSheet.create({
   },
   error: {
     color: colors.error,
+  },
+  barCodeContainer: {
+    height: Platform.OS === "web" ? "100vh" : "100%",
   },
 });

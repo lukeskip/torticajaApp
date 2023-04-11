@@ -27,7 +27,7 @@ export default function BranchScreen(props) {
   const loadItems = async () => {
     if (branch) {
       try {
-        const response = await getData(API_HOST + "/branches/" + result, auth);
+        const response = await getData("/branches/" + branch, auth);
         console.log("load status", response.data.status);
         setOutcomes(response.data.outcomes);
         setStatus(response.data.status);

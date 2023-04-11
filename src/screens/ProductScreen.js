@@ -20,16 +20,20 @@ import { getData } from "../api/api-connections";
 import ProductFormModal from "../components/ProductFormModal";
 
 export default function ProductScreen() {
-  const { auth, orderProducts, isOpen, setIsOpen } = useAuth();
+  const { auth, logout, orderProducts, isOpen, setIsOpen } = useAuth();
   const [products, setProducts] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(null);
   const navigation = useNavigation();
 
   const loadInfo = async () => {
     try {
-      reponse = await getData(API_HOST + "/orders", auth);
-      setProducts(reponse.data);
-      setFilteredProducts(reponse.data);
+      const response = await getData("/orders", auth);
+      if (response.status == 401) {
+        logout();
+      } else {
+        setProducts(response.data);
+        setFilteredProducts(response.data);
+      }
     } catch (error) {
       console.log("orders", error);
     }

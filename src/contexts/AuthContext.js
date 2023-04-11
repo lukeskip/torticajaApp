@@ -56,7 +56,7 @@ export function AuthProvider(props) {
 
     AsyncStorage.getItem("role").then((value) => {
       if (value) {
-        setAuth(value);
+        setRole(value);
       }
     });
   };

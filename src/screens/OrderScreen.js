@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { API_HOST } from "../utils/constants";
-import { getData } from "../api/api-connections";
 import { globalStyles } from "../utils/globalStyles";
 import { colors } from "../utils/constants";
 import ProductList from "../components/ProductList";

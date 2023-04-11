@@ -136,5 +136,15 @@ export const globalStyles = StyleSheet.create({
   },
   barCodeContainer: {
     height: Platform.OS === "web" ? "100vh" : "100%",
+    marginTop: 40,
+  },
+  targetImage: {
+    position: "absolute",
+    width: 300,
+    height: 300,
+    top: "50%",
+    left: "50%",
+    marginTop: -150,
+    marginLeft: -150,
   },
 });

@@ -40,7 +40,8 @@ export default function NavigationStack() {
             name="scan"
             component={BarCodeScanScreen}
             options={{
-              title: "Escaneadno producto",
+              title: "Escaneando producto",
+              headerShown: false,
             }}
           />
         </>

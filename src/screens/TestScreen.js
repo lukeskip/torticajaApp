@@ -16,9 +16,7 @@ export default function BranchScreen(props) {
 
   const loadItems = async () => {
     try {
-      const response = await getData(
-        nextUrl || API_HOST + "/branches/" + branch
-      );
+      const response = await getData(nextUrl || "/branches/" + branch);
       setItems([...items, ...response.data]);
       setNextUrl(response.links.next);
     } catch (error) {

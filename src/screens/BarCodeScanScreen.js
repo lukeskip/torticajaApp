@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Pressable, Image } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { globalStyles } from "../utils/globalStyles";
+import { getData } from "../api/api-connections";
+import useAuth from "../hooks/useAuth";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 export default function BarCodeScanScreen() {
+  const { auth, branch } = useAuth();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const navigation = useNavigation();
+
+  const getBack = () => {
+    console.log("getting back");
+    orderProducts.length === 0
+      ? navigation.navigate("Home")
+      : navigation.navigate("Order");
+  };
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -16,9 +29,16 @@ export default function BarCodeScanScreen() {
     getBarCodeScannerPermissions();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({ type, codeData }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    getData(`/product-search/${branch}/${codeData}`, auth)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    alert(`Scanned`);
   };
 
   if (hasPermission === null) {
@@ -34,6 +54,31 @@ export default function BarCodeScanScreen() {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
+      <Image
+        style={globalStyles.targetImage}
+        source={require("../assets/img/target.png")}
+      />
+      <View
+        style={[
+          {
+            position: "absolute",
+            bottom: 100,
+            left: 0,
+            width: "100%",
+            paddingHorizontal: 20,
+          },
+        ]}
+      >
+        <Pressable
+          style={[globalStyles.button]}
+          onPress={() => navigation.navigate("sale")}
+        >
+          <Text style={globalStyles.buttonText}>
+            <FontAwesome5 name="arrow-circle-left" size={20} color="white" />{" "}
+            Regresar
+          </Text>
+        </Pressable>
+      </View>
       {scanned && (
         <Pressable
           style={globalStyles.button}

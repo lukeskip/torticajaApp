@@ -41,10 +41,9 @@ export default function CashClosing() {
   return (
     <ScrollView style={[globalStyles.content, { marginTop: 40 }]}>
       <Text style={globalStyles.title_1}>Calcular Cajón</Text>
-      <Text style={globalStyles.label}>Masa (kg)</Text>
+      <Text style={[globalStyles.label, { marginTop: 20 }]}>Masa (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
-        placeholder="Masa (kg)"
         onChangeText={(text) => {
           formik.setFieldValue("dough", text.toString());
         }}
@@ -57,7 +56,6 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Masa Fría (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
-        placeholder="Masa Fría (kg)"
         onChangeText={(text) =>
           formik.setFieldValue("coldDough", text.toString())
         }
@@ -70,7 +68,6 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Harina utilizada (bultos)</Text>
       <TextInput
         style={globalStyles.textInput}
-        placeholder="Harina utilizada (bultos)"
         onChangeText={(text) => formik.setFieldValue("flour", text.toString())}
         value={formik.values.flour}
       />
@@ -81,7 +78,6 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Marcador de gas</Text>
       <TextInput
         style={globalStyles.textInput}
-        placeholder="Marcador de gas"
         onChangeText={(text) => formik.setFieldValue("gas", text.toString())}
         value={formik.values.gas}
       />
@@ -92,7 +88,6 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Masa Sobrante (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
-        placeholder="Masa Sobrante (kg)"
         onChangeText={(text) =>
           formik.setFieldValue("doughLeft", text.toString())
         }
@@ -105,7 +100,6 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Tortilla Sobrante (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
-        placeholder="Tortilla Sobrante (kg)"
         onChangeText={(text) =>
           formik.setFieldValue("tortillaLeft", text.toString())
         }
@@ -118,7 +112,6 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Efectivo en caja</Text>
       <TextInput
         style={globalStyles.textInput}
-        placeholder="Efectivo en caja"
         onChangeText={(text) => formik.setFieldValue("cash", text.toString())}
         value={formik.values.cash}
       />

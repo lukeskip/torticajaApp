@@ -104,11 +104,17 @@ export const globalStyles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    marginVertical: 12,
     borderWidth: 1,
     borderColor: colors.gray,
     padding: 10,
     borderRadius: 10,
+    marginBottom: 12,
+  },
+  label: {
+    fontWeight: "bold",
+    fontSize: 12,
+    paddingLeft: 5,
+    marginBottom: 5,
   },
   flex: {
     flexDirection: "row",

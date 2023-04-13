@@ -41,7 +41,7 @@ export default function CashClosing() {
   return (
     <ScrollView style={[globalStyles.content, { marginTop: 40 }]}>
       <Text style={globalStyles.title_1}>Calcular Cajón</Text>
-
+      <Text style={globalStyles.label}>Masa (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
         placeholder="Masa (kg)"
@@ -54,6 +54,7 @@ export default function CashClosing() {
         <Text style={globalStyles.error}> {formik.errors.dough} </Text>
       )}
 
+      <Text style={globalStyles.label}>Masa Fría (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
         placeholder="Masa Fría (kg)"
@@ -66,6 +67,7 @@ export default function CashClosing() {
         <Text style={globalStyles.error}> {formik.errors.coldDough} </Text>
       )}
 
+      <Text style={globalStyles.label}>Harina utilizada (bultos)</Text>
       <TextInput
         style={globalStyles.textInput}
         placeholder="Harina utilizada (bultos)"
@@ -76,6 +78,7 @@ export default function CashClosing() {
         <Text style={globalStyles.error}> {formik.errors.flour} </Text>
       )}
 
+      <Text style={globalStyles.label}>Marcador de gas</Text>
       <TextInput
         style={globalStyles.textInput}
         placeholder="Marcador de gas"
@@ -86,6 +89,7 @@ export default function CashClosing() {
         <Text style={globalStyles.error}> {formik.errors.gas} </Text>
       )}
 
+      <Text style={globalStyles.label}>Masa Sobrante (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
         placeholder="Masa Sobrante (kg)"
@@ -98,6 +102,7 @@ export default function CashClosing() {
         <Text style={globalStyles.error}> {formik.errors.doughLeft} </Text>
       )}
 
+      <Text style={globalStyles.label}>Tortilla Sobrante (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
         placeholder="Tortilla Sobrante (kg)"
@@ -110,6 +115,7 @@ export default function CashClosing() {
         <Text style={globalStyles.error}> {formik.errors.tortillaLeft} </Text>
       )}
 
+      <Text style={globalStyles.label}>Efectivo en caja</Text>
       <TextInput
         style={globalStyles.textInput}
         placeholder="Efectivo en caja"
@@ -118,7 +124,10 @@ export default function CashClosing() {
       />
       <Text style={globalStyles.error}> {formik.errors.cash} </Text>
 
-      <Pressable style={globalStyles.button} onPress={formik.handleSubmit}>
+      <Pressable
+        style={[globalStyles.button, { marginBottom: 40 }]}
+        onPress={formik.handleSubmit}
+      >
         <Text style={globalStyles.buttonText}>Enviar</Text>
       </Pressable>
     </ScrollView>

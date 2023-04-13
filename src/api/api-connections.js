@@ -46,7 +46,7 @@ export async function loginApi(authData) {
   }
 }
 
-export async function sendData(url, data) {
+export async function sendData(url, data, token) {
   try {
     const response = await fetch(API_HOST + url, {
       method: "POST",
@@ -58,8 +58,9 @@ export async function sendData(url, data) {
         "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Headers":
           "Origin,OPTIONS,X-Requested-With,Content-type,Accept",
+        Authorization: "Bearer " + token,
       },
-      body: data,
+      body: JSON.stringify(data),
     });
     const result = await response.json();
     return result;

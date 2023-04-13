@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 export default function CashClosing() {
-  const { auth } = useAuth();
+  const { auth, logout } = useAuth();
   const formik = useFormik({
     initialValues: initialValues(),
     validateOnChange: false,
@@ -16,16 +16,25 @@ export default function CashClosing() {
     onSubmit: async (formValues) => {
       const data = {
         dough: parseFloat(formValues.dough),
-        coldDough: parseFloat(formValues.coldDough),
+        dough_cold: parseFloat(formValues.coldDough),
         flour: parseFloat(formValues.flour),
         gas: parseFloat(formValues.gas),
-        doughLeft: parseFloat(formValues.doughLeft),
-        tortillaLeft: parseFloat(formValues.tortillaLeft),
+        dough_leftover: parseFloat(formValues.doughLeft),
+        tortilla_leftover: parseFloat(formValues.tortillaLeft),
         cash: parseFloat(formValues.cash),
       };
-      const response = await sendData("/cash-closings", data);
-      console.log(response);
-      console.log("se envio");
+
+      sendData("/cash-closings", data, auth)
+        .then((response) => {
+          console.log(data);
+          console.log(response);
+          if (response.status === 401) {
+            logout();
+          } else {
+            console.log("se envio");
+          }
+        })
+        .catch((error) => console.log(error));
     },
   });
   useEffect(() => {}, []);
@@ -41,7 +50,9 @@ export default function CashClosing() {
         }}
         value={formik.values.dough}
       />
-      <Text style={globalStyles.error}> {formik.errors.dough} </Text>
+      {formik.errors.dough && (
+        <Text style={globalStyles.error}> {formik.errors.dough} </Text>
+      )}
 
       <TextInput
         style={globalStyles.textInput}
@@ -51,7 +62,9 @@ export default function CashClosing() {
         }
         value={formik.values.coldDough}
       />
-      <Text style={globalStyles.error}> {formik.errors.coldDough} </Text>
+      {formik.errors.coldDough && (
+        <Text style={globalStyles.error}> {formik.errors.coldDough} </Text>
+      )}
 
       <TextInput
         style={globalStyles.textInput}
@@ -59,7 +72,9 @@ export default function CashClosing() {
         onChangeText={(text) => formik.setFieldValue("flour", text.toString())}
         value={formik.values.flour}
       />
-      <Text style={globalStyles.error}> {formik.errors.flour} </Text>
+      {formik.errors.flour && (
+        <Text style={globalStyles.error}> {formik.errors.flour} </Text>
+      )}
 
       <TextInput
         style={globalStyles.textInput}
@@ -67,7 +82,9 @@ export default function CashClosing() {
         onChangeText={(text) => formik.setFieldValue("gas", text.toString())}
         value={formik.values.gas}
       />
-      <Text style={globalStyles.error}> {formik.errors.gas} </Text>
+      {formik.errors.gas && (
+        <Text style={globalStyles.error}> {formik.errors.gas} </Text>
+      )}
 
       <TextInput
         style={globalStyles.textInput}
@@ -77,7 +94,9 @@ export default function CashClosing() {
         }
         value={formik.values.doughLeft}
       />
-      <Text style={globalStyles.error}> {formik.errors.doughLeft} </Text>
+      {formik.errors.doughLeft && (
+        <Text style={globalStyles.error}> {formik.errors.doughLeft} </Text>
+      )}
 
       <TextInput
         style={globalStyles.textInput}
@@ -87,7 +106,9 @@ export default function CashClosing() {
         }
         value={formik.values.tortillaLeft}
       />
-      <Text style={globalStyles.error}> {formik.errors.tortillaLeft} </Text>
+      {formik.errors.tortillaLeft && (
+        <Text style={globalStyles.error}> {formik.errors.tortillaLeft} </Text>
+      )}
 
       <TextInput
         style={globalStyles.textInput}

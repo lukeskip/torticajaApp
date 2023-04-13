@@ -15,9 +15,9 @@ export default function BranchScreen(props) {
   [status, setStatus] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      await loadItems();
-    })();
+    navigation.addListener("focus", async () => {
+      await loadItems().catch((error) => console.log(error));
+    });
   }, [branch]);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ export default function BranchScreen(props) {
         const response = await getData("/branches/" + branch, auth);
         console.log("load status", response.data.status);
         setOutcomes(response.data.outcomes);
+        setIncomes(response.data.incomes);
         setStatus(response.data.status);
       } catch (error) {
         console.log(error);

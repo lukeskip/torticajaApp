@@ -23,7 +23,11 @@ export default function NavigationTab() {
           fontWeight: "bold",
           color: "white",
         },
-        tabBarStyle: { backgroundColor: colors.mainColor },
+        tabBarStyle: {
+          backgroundColor: colors.mainColor,
+          height: 70,
+          paddingTop: 10,
+        },
       }}
     >
       <Tab.Screen
@@ -42,7 +46,7 @@ export default function NavigationTab() {
         options={{
           tabBarLabel: "Venta",
           tabBarIcon: ({ color, size }) => (
-            <View style={[globalStyles.contentCenter, globalStyles.iconTab]}>
+            <View style={[globalStyles.contentCenter]}>
               <Icon name="cash-register" color="white" size={20} />
             </View>
           ),

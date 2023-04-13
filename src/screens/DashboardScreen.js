@@ -34,9 +34,9 @@ export default function DashboardScreen(props) {
     <ScrollView style={globalStyles.content}>
       {status ? (
         <>
-          <Text style={globalStyles.title_1}>Ventas</Text>
+          <Text style={globalStyles.title_1}>Ventas Hoy</Text>
           <IncomeList incomes={incomes} />
-          <Text style={globalStyles.title_1}>Gastos</Text>
+          <Text style={globalStyles.title_1}>Gastos Hoy</Text>
           <OutcomeList outcomes={outcomes} />
         </>
       ) : (

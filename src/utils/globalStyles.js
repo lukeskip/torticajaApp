@@ -153,4 +153,10 @@ export const globalStyles = StyleSheet.create({
     marginTop: -150,
     marginLeft: -150,
   },
+  picker: {
+    backgroundColor: "white",
+    height: 50,
+    width: "100%",
+    marginTop: 20,
+  },
 });

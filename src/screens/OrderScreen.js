@@ -1,4 +1,6 @@
-import { View, Text, Pressable, ScrollView, Animated } from "react-native";
+import { View, Text, Pressable, ScrollView } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+
 import React, { useState, useEffect } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { sendData } from "../api/api-connections";
@@ -10,8 +12,16 @@ import useAuth from "../hooks/useAuth";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function OrderScreen() {
-  const { auth, logout, orderProducts, calculateTotal, emptyCart, cartTotal } =
-    useAuth();
+  const {
+    auth,
+    logout,
+    orderProducts,
+    calculateTotal,
+    emptyCart,
+    cartTotal,
+    setMethod,
+    method,
+  } = useAuth();
   const navigation = useNavigation();
   const goToProducts = () => {
     navigation.navigate("Products");
@@ -21,7 +31,7 @@ export default function OrderScreen() {
     console.log(orderProducts);
     const data = {
       products: orderProducts,
-      method: "cash",
+      method: method,
     };
     sendData("/orders", data, auth)
       .then((response) => {
@@ -66,6 +76,16 @@ export default function OrderScreen() {
             Terminar Orden (${cartTotal})
           </Text>
         </Pressable>
+      </View>
+      <View style={globalStyles.content}>
+        <Picker
+          selectedValue={method}
+          style={globalStyles.picker}
+          onValueChange={(itemValue, itemIndex) => setMethod(itemValue)}
+        >
+          <Picker.Item label="Efectivo" value="cash" />
+          <Picker.Item label="Tarjeta" value="card" />
+        </Picker>
       </View>
       <ScrollView
         contentContainerStyle={[

@@ -16,6 +16,8 @@ export const AuthContext = createContext({
   setProductModal: () => {},
   productModal: undefined,
   setIsOpen: () => {},
+  setMethod: () => {},
+  method: "cash",
   emptyCart: () => {},
 });
 
@@ -28,6 +30,7 @@ export function AuthProvider(props) {
   const [auth, setAuth] = useState(null);
   const [role, setRole] = useState(null);
   const [branch, setBranch] = useState(null);
+  const [method, setMethod] = useState("cash");
 
   const login = async (userData) => {
     await AsyncStorage.multiSet([
@@ -140,6 +143,8 @@ export function AuthProvider(props) {
     productModal,
     emptyCart,
     calculateTotal,
+    setMethod,
+    method,
   };
 
   return (

@@ -121,7 +121,6 @@ export function AuthProvider(props) {
     orderProducts.forEach((product) => {
       total += product.price * product.amount;
     });
-    console.log("total", total);
     setCartTotal(total);
   };
 

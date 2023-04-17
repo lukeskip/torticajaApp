@@ -1,7 +1,7 @@
 import { View, Text, Pressable, ScrollView, Animated } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
-
+import { sendData } from "../api/api-connections";
 import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
 import { colors } from "../utils/constants";
@@ -10,13 +10,33 @@ import useAuth from "../hooks/useAuth";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function OrderScreen() {
-  const { auth, orderProducts, emptyCart, cartTotal } = useAuth();
+  const { auth, logout, orderProducts, calculateTotal, emptyCart, cartTotal } =
+    useAuth();
   const navigation = useNavigation();
   const goToProducts = () => {
     navigation.navigate("Products");
   };
 
-  useEffect(() => {}, [cartTotal, orderProducts]);
+  const saveOrder = () => {
+    console.log(orderProducts);
+    const data = {
+      products: orderProducts,
+      method: "cash",
+    };
+    sendData("/orders", data, auth)
+      .then((response) => {
+        if (response.status === 401) {
+          logout();
+        } else {
+          console.log(response);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    calculateTotal();
+  }, [cartTotal, orderProducts]);
 
   return (
     <>
@@ -40,9 +60,9 @@ export default function OrderScreen() {
         </Pressable>
         <Pressable
           style={[globalStyles.button, globalStyles.buttonSuccess, { flex: 1 }]}
-          onPress={goToProducts}
+          onPress={saveOrder}
         >
-          <Text style={globalStyles.buttonText} animation="zoomInUp">
+          <Text style={globalStyles.buttonText}>
             Terminar Orden (${cartTotal})
           </Text>
         </Pressable>

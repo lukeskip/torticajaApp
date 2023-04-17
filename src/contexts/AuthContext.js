@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, createContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext({
@@ -7,6 +7,7 @@ export const AuthContext = createContext({
   role: undefined,
   branch: undefined,
   cartTotal: 0,
+  calculateTotal: () => {},
   login: () => {},
   logout: () => {},
   orderProducts: [],
@@ -98,8 +99,6 @@ export function AuthProvider(props) {
         setOrderProducts([...orderProducts, { ...product, amount: 1 }]);
       }
     }
-
-    calculateTotal();
   };
 
   const isOnCart = (id) => {
@@ -118,10 +117,12 @@ export function AuthProvider(props) {
   };
 
   const calculateTotal = () => {
-    let sum = orderProducts.reduce(function (prev, current) {
-      return prev + +(current.price * current.amount);
-    }, 0);
-    setCartTotal(sum.toFixed(2));
+    let total = 0;
+    orderProducts.forEach((product) => {
+      total += product.price * product.amount;
+    });
+    console.log("total", total);
+    setCartTotal(total);
   };
 
   const valueContext = {
@@ -139,6 +140,7 @@ export function AuthProvider(props) {
     setProductModal,
     productModal,
     emptyCart,
+    calculateTotal,
   };
 
   return (

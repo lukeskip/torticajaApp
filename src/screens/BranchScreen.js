@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, ScrollView, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
 import { getData } from "../api/api-connections";
-import OrderList from "../components/OrderList";
+import IncomeList from "../components/IncomeList";
 import OutcomeList from "../components/OutcomeList";
 import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
@@ -32,7 +32,8 @@ export default function BranchScreen(props) {
     if (branch) {
       try {
         const response = await getData("/branches/" + branch, auth);
-        console.log("load data", response.orders);
+
+        console.log("load data", response);
         setOutcomes(response.outcomes);
         setIncomes(response.incomes);
         setOrders(response.orders);
@@ -49,7 +50,7 @@ export default function BranchScreen(props) {
       {branch ? (
         <>
           <Text style={globalStyles.title_1}>Ventas hoy</Text>
-          <OrderList orders={orders} />
+          <IncomeList incomes={incomes} />
           <Text style={globalStyles.title_1}>Gastos hoy</Text>
           <OutcomeList outcomes={outcomes} />
           <Pressable

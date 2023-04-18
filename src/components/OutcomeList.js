@@ -5,8 +5,14 @@ import { globalStyles } from "../utils/globalStyles";
 
 export default function OutcomeList(props) {
   const { outcomes } = props;
-
-  return outcomes.map((outcome) => (
-    <OutcomeItem outcome={outcome} key={outcome.id} />
-  ));
+  console.log("outcomes", outcomes);
+  return outcomes ? (
+    outcomes.map((outcome) => (
+      <OutcomeItem outcome={outcome} key={outcome.id} />
+    ))
+  ) : (
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.text}>No hay gastos</Text>
+    </View>
+  );
 }

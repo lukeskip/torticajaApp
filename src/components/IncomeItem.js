@@ -2,15 +2,38 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { globalStyles } from "../utils/globalStyles";
 import { colors } from "../utils/constants";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function IncomeItem(props) {
   const { income } = props;
 
+  const iconName = () => {
+    switch (income.type) {
+      case "Efectivo":
+        return "money-bill";
+      case "Tarjeta":
+        return "credit-card";
+      case "Transferencia":
+        return "exchange-alt";
+      default:
+        return "money-bill";
+    }
+  };
+
   return (
-    <View key={income.id} style={globalStyles.item}>
-      <Text style={styles.text}>${income.amount}</Text>
-      <Text style={globalStyles.pill}>{income.type}</Text>
-      <Text>{income.date}</Text>
+    <View style={globalStyles.item}>
+      <FontAwesome5
+        style={globalStyles.icon}
+        name={iconName()}
+        color={colors.grayDark}
+        size={20}
+      />
+
+      <Text style={[globalStyles.flexItem, globalStyles.title_2]}>
+        ${income.amount}
+      </Text>
+      <Text style={globalStyles.flexItem}>{income.label}</Text>
+      <Text style={globalStyles.flexItem}>{income.time}</Text>
     </View>
   );
 }

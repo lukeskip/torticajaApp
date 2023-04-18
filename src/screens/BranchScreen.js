@@ -7,31 +7,36 @@ import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
 import useAuth from "../hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function BranchScreen(props) {
   const { auth, branch, logout } = useAuth();
   [incomes, setIncomes] = useState([]);
   [outcomes, setOutcomes] = useState([]);
+  [orders, setOrders] = useState([]);
   [status, setStatus] = useState(false);
-
-  useEffect(() => {
-    navigation.addListener("focus", async () => {
-      await loadItems().catch((error) => console.log(error));
-    });
-  }, [branch]);
 
   useEffect(() => {
     console.log(auth);
   }, [auth]);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        await loadItems().catch((error) => console.log(error));
+      })();
+    }, [branch])
+  );
+
   const loadItems = async () => {
     if (branch) {
       try {
         const response = await getData("/branches/" + branch, auth);
-        console.log("load status", response.data.status);
-        setOutcomes(response.data.outcomes);
-        setIncomes(response.data.incomes);
-        setStatus(response.data.status);
+        console.log("load data", response.orders);
+        setOutcomes(response.outcomes);
+        setIncomes(response.incomes);
+        setOrders(response.orders);
+        setStatus(response.status);
       } catch (error) {
         console.log(error);
       }
@@ -44,7 +49,7 @@ export default function BranchScreen(props) {
       {branch ? (
         <>
           <Text style={globalStyles.title_1}>Ventas hoy</Text>
-          <OrderList />
+          <OrderList orders={orders} />
           <Text style={globalStyles.title_1}>Gastos hoy</Text>
           <OutcomeList outcomes={outcomes} />
           <Pressable

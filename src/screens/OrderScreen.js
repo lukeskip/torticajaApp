@@ -21,6 +21,7 @@ export default function OrderScreen() {
     cartTotal,
     setMethod,
     method,
+    branch,
   } = useAuth();
   const navigation = useNavigation();
   const goToProducts = () => {
@@ -32,14 +33,17 @@ export default function OrderScreen() {
     const data = {
       products: orderProducts,
       method: method,
+      branch: branch,
     };
     sendData("/orders", data, auth)
       .then((response) => {
         if (response.status === 401) {
           logout();
-        } else {
-          console.log(response);
+        } else if (response.status === 201) {
+          emptyCart();
+          navigation.navigate("Home");
         }
+        console.log(response);
       })
       .catch((error) => console.log(error));
   };

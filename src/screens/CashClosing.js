@@ -44,6 +44,7 @@ export default function CashClosing() {
       <Text style={[globalStyles.label, { marginTop: 20 }]}>Masa (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
+        keyboardType="numeric"
         onChangeText={(text) => {
           formik.setFieldValue("dough", text.toString());
         }}
@@ -56,6 +57,7 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Masa Fría (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
+        keyboardType="numeric"
         onChangeText={(text) =>
           formik.setFieldValue("coldDough", text.toString())
         }
@@ -68,6 +70,7 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Harina utilizada (bultos)</Text>
       <TextInput
         style={globalStyles.textInput}
+        keyboardType="numeric"
         onChangeText={(text) => formik.setFieldValue("flour", text.toString())}
         value={formik.values.flour}
       />
@@ -78,6 +81,7 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Marcador de gas</Text>
       <TextInput
         style={globalStyles.textInput}
+        keyboardType="numeric"
         onChangeText={(text) => formik.setFieldValue("gas", text.toString())}
         value={formik.values.gas}
       />
@@ -88,6 +92,7 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Masa Sobrante (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
+        keyboardType="numeric"
         onChangeText={(text) =>
           formik.setFieldValue("doughLeft", text.toString())
         }
@@ -100,6 +105,7 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Tortilla Sobrante (kg)</Text>
       <TextInput
         style={globalStyles.textInput}
+        keyboardType="numeric"
         onChangeText={(text) =>
           formik.setFieldValue("tortillaLeft", text.toString())
         }
@@ -112,6 +118,7 @@ export default function CashClosing() {
       <Text style={globalStyles.label}>Efectivo en caja</Text>
       <TextInput
         style={globalStyles.textInput}
+        keyboardType="numeric"
         onChangeText={(text) => formik.setFieldValue("cash", text.toString())}
         value={formik.values.cash}
       />

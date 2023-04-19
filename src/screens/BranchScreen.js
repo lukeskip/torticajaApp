@@ -1,4 +1,11 @@
-import { View, Text, SafeAreaView, ScrollView, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  Pressable,
+  RefreshControl,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { getData } from "../api/api-connections";
 import IncomeList from "../components/IncomeList";
@@ -11,14 +18,11 @@ import { useFocusEffect } from "@react-navigation/native";
 
 export default function BranchScreen(props) {
   const { auth, branch, logout } = useAuth();
-  [incomes, setIncomes] = useState([]);
-  [outcomes, setOutcomes] = useState([]);
+  [incomesToday, setIncomesToday] = useState([]);
+  [outcomesToday, setOutcomesToday] = useState(null);
   [orders, setOrders] = useState([]);
   [status, setStatus] = useState(false);
-
-  useEffect(() => {
-    console.log(auth);
-  }, [auth]);
+  [refreshing, setRefreshing] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -28,14 +32,17 @@ export default function BranchScreen(props) {
     }, [branch])
   );
 
+  const onRefresh = React.useCallback(async () => {
+    await loadItems().catch((error) => console.log(error));
+    setRefreshing(false);
+  }, []);
+
   const loadItems = async () => {
     if (branch) {
       try {
         const response = await getData("/branches/" + branch, auth);
-
-        console.log("load data", response);
-        setOutcomes(response.outcomes);
-        setIncomes(response.incomes);
+        setOutcomesToday(response.outcomes);
+        setIncomesToday(response.incomes);
         setOrders(response.orders);
         setStatus(response.status);
       } catch (error) {
@@ -43,16 +50,22 @@ export default function BranchScreen(props) {
       }
     }
   };
+
   const { navigation } = props;
 
   return (
-    <ScrollView style={[globalStyles.content, { marginTop: 40 }]}>
+    <ScrollView
+      style={[globalStyles.content, { marginTop: 40 }]}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       {branch ? (
         <>
           <Text style={globalStyles.title_1}>Ventas hoy</Text>
           <IncomeList incomes={incomes} />
           <Text style={globalStyles.title_1}>Gastos hoy</Text>
-          <OutcomeList outcomes={outcomes} />
+          <OutcomeList outcomes={outcomesToday} />
           <Pressable
             style={globalStyles.button}
             onPress={() => {

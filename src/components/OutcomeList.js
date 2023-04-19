@@ -5,7 +5,6 @@ import { globalStyles } from "../utils/globalStyles";
 
 export default function OutcomeList(props) {
   const { outcomes } = props;
-  console.log("outcomes", outcomes);
   return outcomes ? (
     outcomes.map((outcome) => (
       <OutcomeItem outcome={outcome} key={outcome.id} />

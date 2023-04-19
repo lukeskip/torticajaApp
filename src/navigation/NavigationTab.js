@@ -10,6 +10,8 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { globalStyles } from "../utils/globalStyles";
 import { colors } from "../utils/constants";
 import ProductScreen from "../screens/ProductScreen";
+import OutcomeCreateScreen from "../screens/OutcomeCreateScreen";
+import OutcomeScreen from "../screens/OutcomeScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -57,6 +59,16 @@ export default function NavigationTab() {
         component={CashClosing}
         options={{
           tabBarLabel: "Cajón",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="money-bill-wave" color="white" size={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="outcomeScreen"
+        component={OutcomeScreen}
+        options={{
+          tabBarLabel: "Gastos",
           tabBarIcon: ({ color, size }) => (
             <Icon name="money-bill-wave" color="white" size={20} />
           ),

@@ -24,6 +24,7 @@ export const globalStyles = StyleSheet.create({
   title_1: {
     fontSize: 20,
     fontWeight: "bold",
+    marginBottom: 10,
   },
   title_2: {
     fontSize: 18,
@@ -32,6 +33,12 @@ export const globalStyles = StyleSheet.create({
   title_3: {
     fontSize: 16,
     fontWeight: "bold",
+  },
+  section: {
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderColor: colors.grayLight,
+    paddingBottom: 20,
   },
   listContent: {},
   item: {

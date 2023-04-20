@@ -60,27 +60,22 @@ export default function BranchScreen(props) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      {branch ? (
+      {branch && (
         <>
-          <Text style={globalStyles.title_1}>Ventas hoy</Text>
-          <IncomeList incomes={incomes} />
-          <Text style={globalStyles.title_1}>Gastos hoy</Text>
-          <OutcomeList outcomes={outcomes} />
-          <Pressable
-            style={globalStyles.button}
-            onPress={() => {
-              console.log("ir a todos los datos");
-            }}
-          >
-            <Text style={globalStyles.buttonText}>Ver todos los gastos</Text>
-          </Pressable>
+          <View style={globalStyles.section}>
+            <Text style={globalStyles.title_1}>Ventas hoy</Text>
+            {incomes.length > 0 ? (
+              <IncomeList incomes={incomes} />
+            ) : (
+              <Text style={globalStyles.title_2}>No hay datos que mostrar</Text>
+            )}
+          </View>
+          <View style={globalStyles.section}>
+            <Text style={globalStyles.title_1}>Gastos hoy</Text>
+            <OutcomeList outcomes={outcomes} />
+          </View>
         </>
-      ) : (
-        <Text style={globalStyles.title_1}>No hay datos que mostrar</Text>
       )}
-      <Pressable style={globalStyles.button} onPress={logout}>
-        <Text style={globalStyles.buttonText}>Salir</Text>
-      </Pressable>
     </ScrollView>
   );
 }

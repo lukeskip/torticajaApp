@@ -26,6 +26,7 @@ export default function OutcomeScreen() {
   const loadItems = async () => {
     try {
       const response = await getData("/outcomes", auth);
+      console.log(response.outcomes);
       setOutcomes(response.outcomes);
     } catch (error) {
       console.log(error);

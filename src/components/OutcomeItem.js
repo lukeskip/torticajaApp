@@ -1,11 +1,13 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import React from "react";
 import { globalStyles } from "../utils/globalStyles";
 import { colors } from "../utils/constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation } from "@react-navigation/native";
 
 export default function OutcomeItem(props) {
   const { outcome } = props;
+  const navigation = useNavigation();
   iconName = () => {
     switch (outcome.category) {
       case "inhouse":
@@ -13,6 +15,9 @@ export default function OutcomeItem(props) {
       case "outhouse":
         return "money-bill-wave";
     }
+  };
+  openImage = (link) => {
+    navigation.navigate("outcomeImage", { imagePath: link });
   };
   return (
     <View style={globalStyles.item}>
@@ -30,14 +35,15 @@ export default function OutcomeItem(props) {
         <Text style={globalStyles.flexItem}>{outcome.label}</Text>
         <Text style={globalStyles.flexItem}>{outcome.date}</Text>
       </View>
+      <Pressable onPress={() => openImage(outcome.photo)}>
+        <FontAwesome5
+          name="image"
+          size={20}
+          color={colors.grayDark}
+          light
+          style={globalStyles.icon}
+        />
+      </Pressable>
     </View>
   );
 }
-
-styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    flexDirection: "row",
-    marginBottom: 10,
-  },
-});

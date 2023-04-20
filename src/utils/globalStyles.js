@@ -39,6 +39,7 @@ export const globalStyles = StyleSheet.create({
     borderColor: colors.grayLight,
     borderBottomStyle: "solid",
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
     paddingBottom: 10,

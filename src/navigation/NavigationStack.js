@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import OutcomeCreateScreen from "../screens/OutcomeCreateScreen";
+import OutcomeImageScreen from "../screens/OutcomeImageScreen";
 
 export default function NavigationStack() {
   const Stack = createStackNavigator();
@@ -50,6 +51,13 @@ export default function NavigationStack() {
             component={OutcomeCreateScreen}
             options={{
               title: "Reportando gasto",
+            }}
+          />
+          <Stack.Screen
+            name="outcomeImage"
+            component={OutcomeImageScreen}
+            options={{
+              title: "",
             }}
           />
         </>

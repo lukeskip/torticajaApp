@@ -70,7 +70,7 @@ export default function NavigationTab() {
         options={{
           tabBarLabel: "Gastos",
           tabBarIcon: ({ color, size }) => (
-            <Icon name="money-bill-wave" color="white" size={20} />
+            <Icon name="wallet" color="white" size={20} />
           ),
         }}
       />

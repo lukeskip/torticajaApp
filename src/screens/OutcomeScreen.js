@@ -5,6 +5,7 @@ import {
   Pressable,
   RefreshControl,
   ActivityIndicator,
+  StyleSheet,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import OutcomeList from "../components/OutcomeList";
@@ -64,3 +65,9 @@ export default function OutcomeScreen() {
     </ScrollView>
   );
 }
+
+styles = StyleSheet.create({
+  spinner: {
+    marginTop: 100,
+  },
+});

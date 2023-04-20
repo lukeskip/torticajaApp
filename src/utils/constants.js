@@ -5,7 +5,7 @@ export const API_HOST =
     : "http://192.168.5.101:8000/api/v1";
 export const WEB_HOST =
   Platform.OS === "android"
-    ? "http://192.168.5.101:8000/"
+    ? "http://10.0.2.2:8000/"
     : "http://192.168.5.101:8000/";
 export const colors = {
   mainColor: "#c4203b",

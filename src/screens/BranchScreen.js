@@ -18,11 +18,11 @@ import { useFocusEffect } from "@react-navigation/native";
 
 export default function BranchScreen(props) {
   const { auth, branch, logout } = useAuth();
-  [incomesToday, setIncomesToday] = useState([]);
-  [outcomesToday, setOutcomesToday] = useState(null);
-  [orders, setOrders] = useState([]);
-  [status, setStatus] = useState(false);
-  [refreshing, setRefreshing] = useState(false);
+  const [incomes, setIncomes] = useState([]);
+  const [outcomes, setOutcomes] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [status, setStatus] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -41,8 +41,8 @@ export default function BranchScreen(props) {
     if (branch) {
       try {
         const response = await getData("/branches/" + branch, auth);
-        setOutcomesToday(response.outcomes);
-        setIncomesToday(response.incomes);
+        setOutcomes(response.outcomes);
+        setIncomes(response.incomes);
         setOrders(response.orders);
         setStatus(response.status);
       } catch (error) {
@@ -65,7 +65,7 @@ export default function BranchScreen(props) {
           <Text style={globalStyles.title_1}>Ventas hoy</Text>
           <IncomeList incomes={incomes} />
           <Text style={globalStyles.title_1}>Gastos hoy</Text>
-          <OutcomeList outcomes={outcomesToday} />
+          <OutcomeList outcomes={outcomes} />
           <Pressable
             style={globalStyles.button}
             onPress={() => {

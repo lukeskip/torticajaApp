@@ -39,6 +39,7 @@ export async function loginApi(authData) {
       },
       body: authData,
     });
+    console.log(response);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -61,6 +62,29 @@ export async function sendData(url, data, token) {
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function sendDataImage(url, data, token) {
+  try {
+    const response = await fetch(API_HOST + url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credencials": "false",
+        "Access-Control-Allow-Methods": "POST",
+        "Access-Control-Allow-Headers":
+          "Origin,OPTIONS,X-Requested-With,Content-type,Accept",
+        Authorization: "Bearer " + token,
+      },
+      body: data,
     });
     const result = await response.json();
     return result;

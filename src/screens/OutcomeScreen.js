@@ -17,7 +17,7 @@ import { colors } from "../utils/constants";
 
 export default function OutcomeScreen() {
   const { auth, branch } = useAuth();
-  [outcomes, setOutcomes] = useState(null);
+  const [outcomes, setOutcomes] = useState(null);
   const [refreshing, setRefreshing] = React.useState(false);
   const navigation = useNavigation();
   const goTo = () => {

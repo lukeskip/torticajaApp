@@ -68,6 +68,7 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: colors.mainColor,
     paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   buttonCancel: {
     backgroundColor: colors.error,
@@ -120,7 +121,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   flexItem: {
     paddingHorizontal: 5,
@@ -158,5 +159,15 @@ export const globalStyles = StyleSheet.create({
     height: 50,
     width: "100%",
     marginTop: 20,
+  },
+  photoVacancy: {
+    width: 100,
+    height: 100,
+  },
+  thumbnail: {
+    width: 200,
+    height: 200,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

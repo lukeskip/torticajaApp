@@ -78,13 +78,6 @@ export default function NavigationStack() {
               title: "",
             }}
           />
-          <Stack.Screen
-            name="RegisterBranch"
-            component={RegisterBranchScreen}
-            options={{
-              title: "",
-            }}
-          />
         </>
       ) : (
         <>

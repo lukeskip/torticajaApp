@@ -42,7 +42,7 @@ export default function ProductScreen() {
   const getBack = () => {
     console.log("getting back");
     orderProducts.length === 0
-      ? navigation.navigate("Home")
+      ? navigation.navigate("Branch")
       : navigation.navigate("Order");
   };
 
@@ -68,7 +68,7 @@ export default function ProductScreen() {
   return (
     <>
       <View style={globalStyles.header}>
-        <Pressable onPress={() => navigation.navigate("Home")}>
+        <Pressable onPress={() => navigation.navigate("Branch")}>
           <Text>
             <FontAwesome5 name="arrow-circle-left" size={20} color="white" />
           </Text>

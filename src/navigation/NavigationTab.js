@@ -33,7 +33,7 @@ export default function NavigationTab() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Branch"
         component={BranchScreen}
         options={{
           tabBarLabel: "Inicio",

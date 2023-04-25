@@ -38,7 +38,7 @@ export default function BranchScreen(props) {
   }, []);
 
   const loadItems = async () => {
-    if (branch) {
+    if (branch && branch > 0) {
       try {
         const response = await getData("/branches/" + branch, auth);
         setOutcomes(response.outcomes);
@@ -48,6 +48,8 @@ export default function BranchScreen(props) {
       } catch (error) {
         console.log(error);
       }
+    } else {
+      navigation.navigate("registerShop");
     }
   };
 
@@ -60,6 +62,9 @@ export default function BranchScreen(props) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
+      <Pressable onPress={() => logout()}>
+        <Text>Logout</Text>
+      </Pressable>
       {branch && (
         <>
           <View style={globalStyles.section}>

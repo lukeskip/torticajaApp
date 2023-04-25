@@ -12,8 +12,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { loginApi } from "../api/api-connections";
 import useAuth from "../hooks/useAuth";
+import { useNavigation } from "@react-navigation/native";
 
 export default function LoginForm() {
+  const navigation = useNavigation();
   const { login, logout } = useAuth();
   const formik = useFormik({
     initialValues: initialValues(),
@@ -31,9 +33,9 @@ export default function LoginForm() {
   const sendAuth = async (values) => {
     try {
       const response = await loginApi(values);
+      console.log("aqui", response);
       if (response.token) {
         login(response);
-        console.log(response);
       } else {
         console.log("No autorizado");
       }
@@ -64,6 +66,18 @@ export default function LoginForm() {
       </Pressable>
       <Text style={globalStyles.error}>{formik.errors.email}</Text>
       <Text style={globalStyles.error}>{formik.errors.password}</Text>
+      <View style={globalStyles.flex}>
+        <Pressable
+          style={globalStyles.flexItem}
+          onPress={() => navigation.navigate("register")}
+        >
+          <Text style={globalStyles.link}>¿No tienes una cuenta?</Text>
+        </Pressable>
+
+        <Pressable style={globalStyles.flexItem}>
+          <Text style={globalStyles.link}>¿Olvidaste tu contraseña?</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }

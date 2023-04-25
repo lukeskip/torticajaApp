@@ -3,6 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DashboardScreen from "../screens/DashboardScreen";
 import OrderScreen from "../screens/OrderScreen";
 import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen";
+import AccountScreen from "../screens/AccountScreen";
+import RegisterShopScreen from "../screens/RegisterShopScreen";
 import BarCodeScanScreen from "../screens/BarCodeScanScreen";
 import NavigationTab from "./NavigationTab";
 import useAuth from "../hooks/useAuth";
@@ -11,6 +14,7 @@ import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import OutcomeCreateScreen from "../screens/OutcomeCreateScreen";
 import OutcomeImageScreen from "../screens/OutcomeImageScreen";
+import RegisterBranchScreen from "../screens/RegisterBranchScreen";
 
 export default function NavigationStack() {
   const Stack = createStackNavigator();
@@ -60,13 +64,41 @@ export default function NavigationStack() {
               title: "",
             }}
           />
+          <Stack.Screen
+            name="account"
+            component={AccountScreen}
+            options={{
+              title: "",
+            }}
+          />
+          <Stack.Screen
+            name="registerShop"
+            component={RegisterShopScreen}
+            options={{
+              title: "",
+            }}
+          />
+          <Stack.Screen
+            name="RegisterBranch"
+            component={RegisterBranchScreen}
+            options={{
+              title: "",
+            }}
+          />
         </>
       ) : (
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
+        <>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="register"
+            component={RegisterScreen}
+            options={{ headerShown: false }}
+          />
+        </>
       )}
     </Stack.Navigator>
   );

@@ -12,7 +12,7 @@ export default function SettingsScreen(props) {
       <Button
         title="Ir a Home"
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("Branch");
         }}
       />
     </View>

@@ -34,6 +34,11 @@ export const globalStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  paragraph: {
+    fontSize: 14,
+    color: colors.greyDark,
+    marginBottom: 10,
+  },
   section: {
     marginBottom: 20,
     borderBottomWidth: 1,
@@ -163,10 +168,11 @@ export const globalStyles = StyleSheet.create({
     marginLeft: -150,
   },
   picker: {
-    backgroundColor: "white",
-    height: 50,
-    width: "100%",
-    marginTop: 20,
+    height: 40,
+    borderWidth: 1,
+    borderColor: colors.gray,
+    padding: 0,
+    borderRadius: 10,
   },
   photoVacancy: {
     width: 100,

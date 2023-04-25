@@ -16,7 +16,7 @@ export default function BarCodeScanScreen() {
   const getBack = () => {
     console.log("getting back");
     orderProducts.length === 0
-      ? navigation.navigate("Home")
+      ? navigation.navigate("Branch")
       : navigation.navigate("Order");
   };
 

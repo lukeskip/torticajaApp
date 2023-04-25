@@ -5,6 +5,7 @@ export const AuthContext = createContext({
   checkLoging: () => {},
   auth: undefined,
   role: undefined,
+  store: undefined,
   branch: undefined,
   cartTotal: 0,
   calculateTotal: () => {},
@@ -29,16 +30,19 @@ export function AuthProvider(props) {
   const [cartTotal, setCartTotal] = useState([]);
   const [auth, setAuth] = useState(null);
   const [role, setRole] = useState(null);
+  const [store, setStore] = useState(null);
   const [branch, setBranch] = useState(null);
   const [method, setMethod] = useState("cash");
 
   const login = async (userData) => {
     await AsyncStorage.multiSet([
       ["auth", userData.token],
+      ["store", userData.store.toString()],
       ["branch", userData.branch.toString()],
       ["role", userData.role],
     ]).then(() => {
       setAuth(userData.token);
+      setStore(userData.store);
       setBranch(userData.branch);
       setRole(userData.role);
     });
@@ -47,7 +51,6 @@ export function AuthProvider(props) {
   const checkLoging = () => {
     AsyncStorage.getItem("auth").then((value) => {
       if (value) {
-        console.log("asjkjansd");
         setAuth(value);
       }
     });

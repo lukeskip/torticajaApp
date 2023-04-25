@@ -41,7 +41,7 @@ export default function OrderScreen() {
           logout();
         } else if (response.status === 201) {
           emptyCart();
-          navigation.navigate("Home");
+          navigation.navigate("Branch");
         }
         console.log(response);
       })

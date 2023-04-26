@@ -11,6 +11,11 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function RegisterBranchForm(props) {
   const { branches, setBranches } = props;
+
+  const deleteBranch = (id) => {
+    const newBranches = branches.filter((item, i) => i !== id);
+    setBranches(newBranches);
+  };
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -23,7 +28,7 @@ export default function RegisterBranchForm(props) {
       phone: Yup.string().required(validationMessages.required),
     }),
     onSubmit: (formData, actions) => {
-      setBranches([...branches, formData]);
+      setBranches([...branches, { ...formData, id: branches.length }]);
       actions.resetForm();
     },
   });
@@ -35,7 +40,10 @@ export default function RegisterBranchForm(props) {
         {branches.map((item, index) => (
           <View style={[globalStyles.pill, globalStyles.pillBig]} key={index}>
             <Text style={globalStyles.pillBigText}>{item.name}</Text>
-            <Pressable style={globalStyles.pillBigButton}>
+            <Pressable
+              style={globalStyles.pillBigButton}
+              onPress={() => deleteBranch(item.id)}
+            >
               <FontAwesome5
                 style={{ textAlign: "center" }}
                 name="times"
@@ -77,13 +85,14 @@ export default function RegisterBranchForm(props) {
       {formik.errors.phone && (
         <Text style={globalStyles.error}>{formik.errors.phone}</Text>
       )}
-
-      <Pressable
-        style={[globalStyles.button, { marginTop: 20 }]}
-        onPress={formik.handleSubmit}
-      >
-        <Text style={globalStyles.buttonText}>Agregar Sucursal</Text>
-      </Pressable>
+      <View style={globalStyles.flex}>
+        <Pressable
+          style={[globalStyles.button, { marginTop: 20 }]}
+          onPress={formik.handleSubmit}
+        >
+          <Text style={globalStyles.buttonText}>Agregar Sucursal</Text>
+        </Pressable>
+      </View>
     </ScrollView>
   );
 }

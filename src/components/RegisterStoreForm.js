@@ -19,6 +19,9 @@ export default function RegisterStoreForm() {
   const [page, setPage] = useState(1);
   const [branches, setBranches] = useState([]);
   const navigation = useNavigation();
+  const goBack = () => {
+    setPage(1);
+  };
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -114,12 +117,22 @@ export default function RegisterStoreForm() {
       ) : (
         <RegisterBranchForm branches={branches} setBranches={setBranches} />
       )}
-      <Pressable
-        style={[globalStyles.button, { marginTop: 20 }]}
-        onPress={formik.handleSubmit}
-      >
-        <Text style={globalStyles.buttonText}>Siguiente</Text>
-      </Pressable>
+      <View style={[globalStyles.flex, { gap: 10 }]}>
+        {page === 2 && (
+          <Pressable
+            style={[globalStyles.button, { marginTop: 20 }]}
+            onPress={goBack}
+          >
+            <Text style={globalStyles.buttonText}>Regresar</Text>
+          </Pressable>
+        )}
+        <Pressable
+          style={[globalStyles.button, { marginTop: 20 }]}
+          onPress={formik.handleSubmit}
+        >
+          <Text style={globalStyles.buttonText}>Siguiente</Text>
+        </Pressable>
+      </View>
     </ScrollView>
   );
 }

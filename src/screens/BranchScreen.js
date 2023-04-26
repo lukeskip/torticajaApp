@@ -48,12 +48,14 @@ export default function BranchScreen(props) {
       } catch (error) {
         console.log(error);
       }
-    } else {
-      navigation.navigate("registerShop");
     }
   };
 
   const { navigation } = props;
+
+  useEffect(() => {
+    console.log(branch);
+  }, [branch]);
 
   return (
     <ScrollView

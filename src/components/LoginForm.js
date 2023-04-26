@@ -6,6 +6,7 @@ import {
   View,
   Keyboard,
   Pressable,
+  Image,
 } from "react-native";
 import { globalStyles } from "../utils/globalStyles";
 import { useFormik } from "formik";
@@ -46,16 +47,22 @@ export default function LoginForm() {
 
   return (
     <View style={[globalStyles.content, globalStyles.contentCenter]}>
+      <View style={globalStyles.flex}>
+        <Image
+          source={require("../assets/img/logo.png")}
+          style={globalStyles.logo}
+        />
+      </View>
       <TextInput
         placeholder="Email"
-        style={globalStyles.textInput}
+        style={[globalStyles.textInput, { marginBottom: 20 }]}
         autoCapitalize="none"
         value={formik.values.email}
         onChangeText={(text) => formik.setFieldValue("email", text)}
       />
       <TextInput
         placeholder="Contraseña"
-        style={globalStyles.textInput}
+        style={[globalStyles.textInput, { marginBottom: 20 }]}
         autoCapitalize="none"
         secureTextEntry={true}
         value={formik.values.password}

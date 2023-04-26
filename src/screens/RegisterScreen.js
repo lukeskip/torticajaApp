@@ -6,19 +6,10 @@ import useAuth from "../hooks/useAuth";
 
 export default function RegisterScreen() {
   const { login, auth } = useAuth();
-  const [formValues, setFormValues] = useState([]);
 
   useEffect(() => {
     console.log(auth);
   }, [auth]);
 
-  return (
-    <>
-      {!auth ? (
-        <RegisterForm formValues={formValues} />
-      ) : (
-        <RegisterStoreForm formValues={formValues} />
-      )}
-    </>
-  );
+  return <>{!auth ? <RegisterForm /> : <RegisterStoreForm />}</>;
 }

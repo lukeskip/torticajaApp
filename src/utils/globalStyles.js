@@ -1,6 +1,11 @@
 import { StyleSheet, Platform } from "react-native";
 import { colors } from "./constants";
 export const globalStyles = StyleSheet.create({
+  logo: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+  },
   content: {
     paddingHorizontal: 20,
   },
@@ -116,19 +121,56 @@ export const globalStyles = StyleSheet.create({
     fontSize: 10,
     fontStyle: "italic",
   },
+  pillList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    marginVertical: 40,
+    borderColor: colors.gray,
+    borderWidth: 2,
+    borderStyle: "dashed",
+    paddingVertical: 20,
+  },
+  pillBig: {
+    backgroundColor: colors.gray,
+    fontStyle: "normal",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 5,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+  },
+  pillBigText: {
+    color: "white",
+    fontSize: 18,
+    paddingHorizontal: 10,
+  },
+  pillBigButton: {
+    backgroundColor: colors.error,
+    width: 30,
+    height: 25,
+    textAlign: "center",
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   textInput: {
     height: 40,
     borderWidth: 1,
     borderColor: colors.gray,
     padding: 10,
     borderRadius: 10,
-    marginBottom: 12,
   },
   label: {
     fontWeight: "bold",
     fontSize: 12,
     paddingLeft: 5,
     marginBottom: 5,
+    marginTop: 15,
   },
   flex: {
     flexDirection: "row",
@@ -139,6 +181,7 @@ export const globalStyles = StyleSheet.create({
   flexItem: {
     paddingHorizontal: 5,
   },
+
   card: {
     flex: 1,
     padding: 20,

@@ -20,6 +20,8 @@ export const AuthContext = createContext({
   setMethod: () => {},
   method: "cash",
   emptyCart: () => {},
+  setStore: () => {},
+  setBranch: () => {},
 });
 
 export function AuthProvider(props) {
@@ -37,14 +39,14 @@ export function AuthProvider(props) {
   const login = async (userData) => {
     await AsyncStorage.multiSet([
       ["auth", userData.token],
+      ["role", userData.role],
       ["store", userData.store.toString()],
       ["branch", userData.branch.toString()],
-      ["role", userData.role],
     ]).then(() => {
       setAuth(userData.token);
-      setStore(userData.store);
-      setBranch(userData.branch);
       setRole(userData.role);
+      setStore(parseInt(userData.store));
+      setBranch(parseInt(userData.branch));
     });
   };
 
@@ -57,7 +59,13 @@ export function AuthProvider(props) {
 
     AsyncStorage.getItem("branch").then((value) => {
       if (value) {
-        setBranch(value);
+        setBranch(parseInt(value));
+      }
+    });
+
+    AsyncStorage.getItem("store").then((value) => {
+      if (value) {
+        setStore(parseInt(value));
       }
     });
 
@@ -132,9 +140,10 @@ export function AuthProvider(props) {
 
   const valueContext = {
     checkLoging,
-    branch,
-    role,
     auth,
+    role,
+    store,
+    branch,
     cartTotal,
     login,
     logout,
@@ -143,6 +152,8 @@ export function AuthProvider(props) {
     isOpen,
     setIsOpen,
     setProductModal,
+    setStore,
+    setBranch,
     productModal,
     emptyCart,
     calculateTotal,

@@ -1,15 +1,17 @@
 import { ScrollView, View, Text, Pressable, TextInput } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { sendData } from "../api/api-connections";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { globalStyles } from "../utils/globalStyles";
+import { colors } from "../utils/constants";
 
 export default function RegisterForm() {
   const navigation = useNavigation();
   const { login } = useAuth();
+  const [checkBox, setCheckBox] = useState(false);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -42,6 +44,7 @@ export default function RegisterForm() {
       }
     },
   });
+
   return (
     <ScrollView style={[globalStyles.content, { marginTop: 40 }]}>
       <Text style={globalStyles.title_1}>Registro:</Text>
@@ -87,7 +90,11 @@ export default function RegisterForm() {
         }
         value={formik.values.password_confirmation}
       />
-      <Pressable style={globalStyles.button} onPress={formik.handleSubmit}>
+
+      <Pressable
+        style={[globalStyles.button, { marginTop: 20 }]}
+        onPress={formik.handleSubmit}
+      >
         <Text style={globalStyles.buttonText}>Enviar</Text>
       </Pressable>
       <View style={[globalStyles.flex, { marginTop: 20 }]}>

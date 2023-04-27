@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 export default function CashClosing() {
-  const { auth, logout } = useAuth();
+  const { auth, branch, logout } = useAuth();
   const formik = useFormik({
     initialValues: initialValues(),
     validateOnChange: false,
@@ -22,6 +22,7 @@ export default function CashClosing() {
         dough_leftover: parseFloat(formValues.doughLeft),
         tortilla_leftover: parseFloat(formValues.tortillaLeft),
         cash: parseFloat(formValues.cash),
+        branch: branch,
       };
 
       sendData("/cash-closings", data, auth)

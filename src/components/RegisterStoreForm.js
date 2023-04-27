@@ -42,7 +42,9 @@ export default function RegisterStoreForm() {
         try {
           const response = await sendData("/stores", formData, auth);
           console.log("response", response);
-          if (response.success === true) {
+          if (response.status === 401) {
+            logout();
+          } else if (response.success === true) {
             login(response);
           }
         } catch (error) {

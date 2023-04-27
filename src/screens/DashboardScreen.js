@@ -1,47 +1,51 @@
-import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  Pressable,
+  RefreshControl,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { getData } from "../api/api-connections";
-import IncomeList from "../components/IncomeList";
-import OutcomeList from "../components/OutcomeList";
+import BranchScreen from "./BranchScreen";
 import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
 import useAuth from "../hooks/useAuth";
+import { useFocusEffect } from "@react-navigation/native";
 
-export default function DashboardScreen(props) {
-  [incomes, setIncomes] = useState([]);
-  [outcomes, setOutcomes] = useState([]);
-  [status, setStatus] = useState(false);
-  const { auth, logout } = useAuth();
+export default function DashboardScreen() {
+  const { auth, role, logout } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
+  const [summary, setSummary] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      await loadItems();
-    })();
+  const onRefresh = React.useCallback(async () => {
+    await loadItems().catch((error) => console.log(error));
+    setRefreshing(false);
   }, []);
 
   const loadItems = async () => {
     try {
-      const response = await getData(API_HOST + "/dashboard", auth);
-      setIncomes(response.data.incomes);
-      setOutcomes(response.data.outcomes);
+      response = await getData("/dashboard", auth);
+      setSummary(response);
     } catch (error) {
       console.log(error);
     }
   };
-  const { navigation } = props;
 
-  return (
-    <ScrollView style={globalStyles.content}>
-      {status ? (
-        <>
-          <Text style={globalStyles.title_1}>Ventas Hoy</Text>
-          <IncomeList incomes={incomes} />
-          <Text style={globalStyles.title_1}>Gastos Hoy</Text>
-          <OutcomeList outcomes={outcomes} />
-        </>
-      ) : (
-        <Text style={globalStyles.title_1}>No hay datos que mostrara</Text>
-      )}
+  return role === "admin" ? (
+    <ScrollView
+      style={[globalStyles.content, { marginTop: 40 }]}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      <Text style={globalStyles.title}>Dashboard</Text>
+      <Pressable>
+        <Text style={globalStyles.title}>{role}</Text>
+      </Pressable>
     </ScrollView>
+  ) : (
+    <BranchScreen summary={summary} />
   );
 }

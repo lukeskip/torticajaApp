@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TextInput, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Picker } from "@react-native-picker/picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useFormik } from "formik";
@@ -22,6 +22,9 @@ export default function RegisterStoreForm() {
   const goBack = () => {
     setPage(1);
   };
+  useEffect(() => {
+    console.log("branches", branches);
+  }, [branches]);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -40,8 +43,11 @@ export default function RegisterStoreForm() {
         setPage(2);
       } else {
         try {
+          formData.branches = branches;
+          console.log("formdata", formData);
           const response = await sendData("/stores", formData, auth);
           console.log("response", response);
+
           if (response.status === 401) {
             logout();
           } else if (response.success === true) {

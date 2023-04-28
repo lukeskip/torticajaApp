@@ -17,7 +17,7 @@ import { useFocusEffect } from "@react-navigation/native";
 export default function DashboardScreen() {
   const { auth, role, logout } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
-  const [summary, setSummary] = useState(null);
+  const [branches, setBranches] = useState([]);
 
   const onRefresh = React.useCallback(async () => {
     await loadItems().catch((error) => console.log(error));
@@ -27,13 +27,22 @@ export default function DashboardScreen() {
   const loadItems = async () => {
     try {
       response = await getData("/dashboard", auth);
-      setSummary(response);
+      console.log("response", response);
+      setBranches(response.data.branches);
     } catch (error) {
       console.log(error);
     }
   };
 
-  return role === "admin" ? (
+  useEffect(() => {
+    loadItems().catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    console.log(branches);
+  }, [branches]);
+
+  return (
     <ScrollView
       style={[globalStyles.content, { marginTop: 40 }]}
       refreshControl={
@@ -41,11 +50,15 @@ export default function DashboardScreen() {
       }
     >
       <Text style={globalStyles.title}>Dashboard</Text>
-      <Pressable>
-        <Text style={globalStyles.title}>{role}</Text>
+
+      {branches.map((branch) => (
+        <Pressable style={globalStyles.button}>
+          <Text style={globalStyles.buttonText}>{branch.name}</Text>
+        </Pressable>
+      ))}
+      <Pressable style={globalStyles.button} onPress={logout}>
+        <Text style={globalStyles.buttonText}>Salir</Text>
       </Pressable>
     </ScrollView>
-  ) : (
-    <BranchScreen summary={summary} />
   );
 }

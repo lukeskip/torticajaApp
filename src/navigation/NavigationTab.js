@@ -12,10 +12,12 @@ import { colors } from "../utils/constants";
 import ProductScreen from "../screens/ProductScreen";
 import OutcomeCreateScreen from "../screens/OutcomeCreateScreen";
 import OutcomeScreen from "../screens/OutcomeScreen";
+import useAuth from "../hooks/useAuth";
 
 const Tab = createBottomTabNavigator();
 
 export default function NavigationTab() {
+  const { role } = useAuth();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -32,26 +34,30 @@ export default function NavigationTab() {
         },
       }}
     >
-      {/* <Tab.Screen
-        name="Branch"
-        component={BranchScreen}
-        options={{
-          tabBarLabel: "Inicio",
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="home" color="white" size={20} />
-          ),
-        }}
-      /> */}
-      <Tab.Screen
-        name="Dashboard"
-        component={DashboardScreen}
-        options={{
-          tabBarLabel: "Inicio",
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="home" color="white" size={20} />
-          ),
-        }}
-      />
+      {role === "admin" ? (
+        <Tab.Screen
+          name="Dashboard"
+          component={DashboardScreen}
+          options={{
+            tabBarLabel: "Inicio",
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="home" color="white" size={20} />
+            ),
+          }}
+        />
+      ) : (
+        <Tab.Screen
+          name="Branch"
+          component={BranchScreen}
+          options={{
+            tabBarLabel: "Inicio",
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="home" color="white" size={20} />
+            ),
+          }}
+        />
+      )}
+
       <Tab.Screen
         name="sale"
         component={ProductScreen}

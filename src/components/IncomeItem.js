@@ -5,7 +5,7 @@ import { colors } from "../utils/constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function IncomeItem(props) {
-  const { income, edition } = props;
+  const { income, edition = false } = props;
 
   const iconName = () => {
     switch (income.type) {

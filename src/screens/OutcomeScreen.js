@@ -57,11 +57,21 @@ export default function OutcomeScreen() {
       <Pressable style={globalStyles.button} onPress={goTo}>
         <Text style={globalStyles.buttonText}>Crear Gasto</Text>
       </Pressable>
-      {outcomes ? (
-        <OutcomeList outcomes={outcomes} />
-      ) : (
-        <ActivityIndicator size="large" style={styles.spinner} color="black" />
-      )}
+      <View style={{ marginTop: 20 }}>
+        {outcomes ? (
+          <OutcomeList
+            loadItems={loadItems}
+            edition={true}
+            outcomes={outcomes}
+          />
+        ) : (
+          <ActivityIndicator
+            size="large"
+            style={styles.spinner}
+            color="black"
+          />
+        )}
+      </View>
     </ScrollView>
   );
 }

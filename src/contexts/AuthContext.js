@@ -78,6 +78,12 @@ export function AuthProvider(props) {
         setRole(value);
       }
     });
+
+    AsyncStorage.getItem("name").then((value) => {
+      if (value) {
+        setName(value);
+      }
+    });
   };
 
   const logout = async () => {

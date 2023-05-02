@@ -35,6 +35,7 @@ export default function LoginForm() {
   const sendAuth = async (values) => {
     try {
       const response = await loginApi(values);
+      console.log("LOGIN", response);
       if (response.success) {
         login(response);
       } else {

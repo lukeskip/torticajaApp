@@ -6,6 +6,9 @@ export const globalStyles = StyleSheet.create({
     height: 200,
     marginBottom: 20,
   },
+  marginTop: {
+    marginTop: 60,
+  },
   link: {
     color: colors.mainColor,
     fontWeight: "bold",
@@ -50,7 +53,9 @@ export const globalStyles = StyleSheet.create({
   },
   section: {
     marginBottom: 20,
-    paddingBottom: 20,
+  },
+  fontSmall: {
+    fontSize: 10,
   },
   listContent: {},
   item: {
@@ -63,7 +68,6 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     paddingBottom: 10,
     lineHeight: 100,
-    height: 60,
   },
   icon: {
     marginHorizontal: 10,

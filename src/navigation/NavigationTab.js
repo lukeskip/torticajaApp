@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DashboardScreen from "../screens/DashboardScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -29,7 +29,7 @@ export default function NavigationTab() {
         },
         tabBarStyle: {
           backgroundColor: colors.mainColor,
-          height: 70,
+          height: Platform.OS === "ios" ? 120 : 70,
           paddingTop: 10,
         },
       }}

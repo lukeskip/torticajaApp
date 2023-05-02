@@ -4,11 +4,11 @@ import { globalStyles } from "../utils/globalStyles";
 import IncomeItem from "./IncomeItem";
 
 export default function IncomeList(props) {
-  const { incomes, edition = false } = props;
+  const { incomes, edition } = props;
 
   return incomes ? (
     incomes.map((income) => (
-      <IncomeItem edition income={income} key={income.id} />
+      <IncomeItem edition={edition} income={income} key={income.id} />
     ))
   ) : (
     <View style={globalStyles.container}>

@@ -10,6 +10,7 @@ import React, { useState, useEffect } from "react";
 import { getData } from "../api/api-connections";
 import IncomeList from "../components/IncomeList";
 import OutcomeList from "../components/OutcomeList";
+import OrderList from "../components/OrderList";
 import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
 import useAuth from "../hooks/useAuth";
@@ -20,7 +21,7 @@ import UserInfo from "../components/UserInfo";
 export default function BranchScreen(props) {
   const { auth, branch, role, logout } = useAuth();
   const [incomes, setIncomes] = useState([]);
-  const [outcomes, setOutcomes] = useState(null);
+  const [outcomes, setOutcomes] = useState([]);
   const [orders, setOrders] = useState([]);
   const [status, setStatus] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -30,6 +31,9 @@ export default function BranchScreen(props) {
     switch (url) {
       case "outcomes":
         navigation.navigate("outcomeScreen");
+        break;
+      case "orders":
+        navigation.navigate("orderList");
         break;
       case "incomes":
         navigation.navigate("incomeScreen");
@@ -54,6 +58,7 @@ export default function BranchScreen(props) {
     if (branch && branch > 0) {
       try {
         const response = await getData("/branches/" + branch, auth);
+        console.log("response", response);
         setOutcomes(response.outcomes);
         setIncomes(response.incomes);
         setOrders(response.orders);
@@ -75,20 +80,19 @@ export default function BranchScreen(props) {
       >
         {branch && (
           <>
-            <Text style={globalStyles.title_1}> {branch.name}</Text>
             <View style={globalStyles.section}>
-              <Text style={globalStyles.title_1}>Ventas hoy</Text>
-              {incomes.length > 0 ? (
+              <Text style={globalStyles.title_1}>Tickets hoy</Text>
+              {orders && orders.length > 0 ? (
                 <>
-                  <IncomeList incomes={incomes} />
+                  <OrderList orders={orders} />
                   <Pressable>
                     <Text
                       style={globalStyles.link}
                       onPress={() => {
-                        goTo("incomes");
+                        goTo("orders");
                       }}
                     >
-                      Ver todas las ventas
+                      Ver todas los tickets hoy
                     </Text>
                   </Pressable>
                 </>
@@ -98,7 +102,7 @@ export default function BranchScreen(props) {
             </View>
             <View style={globalStyles.section}>
               <Text style={globalStyles.title_1}>Gastos hoy</Text>
-              {outcomes.length > 0 ? (
+              {outcomes && outcomes.length > 0 ? (
                 <>
                   <OutcomeList outcomes={outcomes} />
                   <Pressable>

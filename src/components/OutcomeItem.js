@@ -3,10 +3,13 @@ import React from "react";
 import { globalStyles } from "../utils/globalStyles";
 import { colors } from "../utils/constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { removeItem } from "../api/api-connections";
+import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 
 export default function OutcomeItem(props) {
-  const { outcome } = props;
+  const { auth } = useAuth();
+  const { outcome, edition, loadItems } = props;
   const navigation = useNavigation();
   iconName = () => {
     switch (outcome.category) {
@@ -18,6 +21,14 @@ export default function OutcomeItem(props) {
   };
   openImage = (link) => {
     navigation.navigate("outcomeImage", { imagePath: link });
+  };
+  remove = async (id) => {
+    try {
+      const response = await removeItem(`/outcomes/${id}`, auth);
+      if (response.success) {
+        loadItems();
+      }
+    } catch (error) {}
   };
   return (
     <View style={globalStyles.item}>
@@ -36,18 +47,19 @@ export default function OutcomeItem(props) {
         <Text style={globalStyles.flexItem}>{outcome.date}</Text>
       </View>
       <Pressable onPress={() => openImage(outcome.photo)}>
-        <FontAwesome5
-          name="image"
-          size={20}
-          color={colors.grayDark}
-          light
-          style={globalStyles.icon}
-        />
+        <FontAwesome5 name="image" size={20} color={colors.mainColor} light />
       </Pressable>
       {edition && (
         <>
-          <Text>borrar</Text>
-          <Text>Editar</Text>
+          <Pressable onPress={() => remove(outcome.id)}>
+            <Text>
+              <FontAwesome5
+                name="trash-alt"
+                color={colors.mainColor}
+                size={18}
+              />
+            </Text>
+          </Pressable>
         </>
       )}
     </View>

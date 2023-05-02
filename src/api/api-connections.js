@@ -69,6 +69,32 @@ export async function sendData(url, data, token) {
   }
 }
 
+export async function removeItem(url, token) {
+  console.log(token);
+  try {
+    const response = await fetch(API_HOST + url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credencials": "false",
+        "Access-Control-Allow-Methods": "POST",
+        "Access-Control-Allow-Headers":
+          "Origin,OPTIONS,X-Requested-With,Content-type,Accept",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        _method: "DELETE",
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function sendDataImage(url, data, token) {
   try {
     const response = await fetch(API_HOST + url, {

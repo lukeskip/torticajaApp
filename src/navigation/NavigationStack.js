@@ -4,6 +4,7 @@ import DashboardScreen from "../screens/DashboardScreen";
 import OrderScreen from "../screens/OrderScreen";
 import LoginScreen from "../screens/LoginScreen";
 import IncomeScreen from "../screens/IncomeScreen";
+import OrderListScreen from "../screens/OrderListScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import AccountScreen from "../screens/AccountScreen";
 import BarCodeScanScreen from "../screens/BarCodeScanScreen";
@@ -42,6 +43,13 @@ export default function NavigationStack() {
             component={OrderScreen}
             options={{
               title: "Generando Orden",
+            }}
+          />
+          <Stack.Screen
+            name="orderList"
+            component={OrderListScreen}
+            options={{
+              title: "Tickets",
             }}
           />
           <Stack.Screen

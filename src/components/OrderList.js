@@ -3,6 +3,8 @@ import React from "react";
 import OrderItem from "./OrderItem";
 
 export default function OrderList(props) {
-  const { orders } = props;
-  return orders.map((order) => <OrderItem key={order.id} order={order} />);
+  const { orders, edition } = props;
+  return orders.map((order) => (
+    <OrderItem edition={edition} key={order.id} order={order} />
+  ));
 }

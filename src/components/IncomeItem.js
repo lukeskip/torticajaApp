@@ -5,7 +5,7 @@ import { colors } from "../utils/constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function IncomeItem(props) {
-  const { income } = props;
+  const { income, edition } = props;
 
   const iconName = () => {
     switch (income.type) {
@@ -34,6 +34,12 @@ export default function IncomeItem(props) {
       </Text>
       <Text style={globalStyles.flexItem}>{income.label}</Text>
       <Text style={globalStyles.flexItem}>{income.time}</Text>
+      {edition && (
+        <>
+          <Text>borrar</Text>
+          <Text>Editar</Text>
+        </>
+      )}
     </View>
   );
 }

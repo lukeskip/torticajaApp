@@ -50,8 +50,6 @@ export const globalStyles = StyleSheet.create({
   },
   section: {
     marginBottom: 20,
-    borderBottomWidth: 1,
-    borderColor: colors.grayLight,
     paddingBottom: 20,
   },
   listContent: {},

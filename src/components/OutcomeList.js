@@ -4,10 +4,10 @@ import OutcomeItem from "./OutcomeItem";
 import { globalStyles } from "../utils/globalStyles";
 
 export default function OutcomeList(props) {
-  const { outcomes } = props;
+  const { outcomes, edition = false } = props;
   return outcomes ? (
     outcomes.map((outcome) => (
-      <OutcomeItem outcome={outcome} key={outcome.id} />
+      <OutcomeItem edition outcome={outcome} key={outcome.id} />
     ))
   ) : (
     <View style={globalStyles.container}>

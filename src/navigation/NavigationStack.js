@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DashboardScreen from "../screens/DashboardScreen";
 import OrderScreen from "../screens/OrderScreen";
 import LoginScreen from "../screens/LoginScreen";
+import IncomeScreen from "../screens/IncomeScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import AccountScreen from "../screens/AccountScreen";
 import BarCodeScanScreen from "../screens/BarCodeScanScreen";
@@ -30,57 +31,56 @@ export default function NavigationStack() {
   return (
     <Stack.Navigator initialRouteName="Tab">
       {auth ? (
-        (role == "admin" && store < 0) || (role != "admin" && branch < 0) ? (
+        <>
           <Stack.Screen
-            name="RegisterStore"
-            component={RegisterStoreScreen}
+            name="Tab"
+            component={NavigationTab}
             options={{ headerShown: false }}
           />
-        ) : (
-          <>
-            <Stack.Screen
-              name="Tab"
-              component={NavigationTab}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Order"
-              component={OrderScreen}
-              options={{
-                title: "Generando Orden",
-              }}
-            />
-            <Stack.Screen
-              name="scan"
-              component={BarCodeScanScreen}
-              options={{
-                title: "Escaneando producto",
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="createOutcome"
-              component={OutcomeCreateScreen}
-              options={{
-                title: "Reportando gasto",
-              }}
-            />
-            <Stack.Screen
-              name="outcomeImage"
-              component={OutcomeImageScreen}
-              options={{
-                title: "",
-              }}
-            />
-            <Stack.Screen
-              name="account"
-              component={AccountScreen}
-              options={{
-                title: "",
-              }}
-            />
-          </>
-        )
+          <Stack.Screen
+            name="Order"
+            component={OrderScreen}
+            options={{
+              title: "Generando Orden",
+            }}
+          />
+          <Stack.Screen
+            name="scan"
+            component={BarCodeScanScreen}
+            options={{
+              title: "Escaneando producto",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="createOutcome"
+            component={OutcomeCreateScreen}
+            options={{
+              title: "Reportando gasto",
+            }}
+          />
+          <Stack.Screen
+            name="outcomeImage"
+            component={OutcomeImageScreen}
+            options={{
+              title: "",
+            }}
+          />
+          <Stack.Screen
+            name="account"
+            component={AccountScreen}
+            options={{
+              title: "",
+            }}
+          />
+          <Stack.Screen
+            name="incomeScreen"
+            component={IncomeScreen}
+            options={{
+              title: "",
+            }}
+          />
+        </>
       ) : (
         <>
           <Stack.Screen

@@ -44,6 +44,12 @@ export default function OutcomeItem(props) {
           style={globalStyles.icon}
         />
       </Pressable>
+      {edition && (
+        <>
+          <Text>borrar</Text>
+          <Text>Editar</Text>
+        </>
+      )}
     </View>
   );
 }

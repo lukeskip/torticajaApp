@@ -26,8 +26,15 @@ export default function BranchScreen(props) {
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
 
-  const goToDashBoard = () => {
-    navigation.navigate("Dashboard");
+  const goTo = (url) => {
+    switch (url) {
+      case "outcomes":
+        navigation.navigate("outcomeScreen");
+        break;
+      case "incomes":
+        navigation.navigate("incomeScreen");
+        break;
+    }
   };
 
   useFocusEffect(
@@ -66,27 +73,48 @@ export default function BranchScreen(props) {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {role === "admin" && (
-          <Pressable onPress={goToDashBoard}>
-            <Text>Dashboard</Text>
-          </Pressable>
-        )}
         {branch && (
           <>
             <Text style={globalStyles.title_1}> {branch.name}</Text>
             <View style={globalStyles.section}>
               <Text style={globalStyles.title_1}>Ventas hoy</Text>
               {incomes.length > 0 ? (
-                <IncomeList incomes={incomes} />
+                <>
+                  <IncomeList incomes={incomes} />
+                  <Pressable>
+                    <Text
+                      style={globalStyles.link}
+                      onPress={() => {
+                        goTo("incomes");
+                      }}
+                    >
+                      Ver todas las ventas
+                    </Text>
+                  </Pressable>
+                </>
               ) : (
-                <Text style={globalStyles.title_2}>
-                  No hay datos que mostrar
-                </Text>
+                <Text>No hay datos que mostrar</Text>
               )}
             </View>
             <View style={globalStyles.section}>
               <Text style={globalStyles.title_1}>Gastos hoy</Text>
-              <OutcomeList outcomes={outcomes} />
+              {outcomes.length > 0 ? (
+                <>
+                  <OutcomeList outcomes={outcomes} />
+                  <Pressable>
+                    <Text
+                      style={globalStyles.link}
+                      onPress={() => {
+                        goTo("outcomes");
+                      }}
+                    >
+                      Ver todas las ventas
+                    </Text>
+                  </Pressable>
+                </>
+              ) : (
+                <Text>No hay datos que mostrar</Text>
+              )}
             </View>
           </>
         )}

@@ -14,15 +14,20 @@ import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
 import useAuth from "../hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 export default function BranchScreen(props) {
-  const { auth, branch, logout } = useAuth();
+  const { auth, branch, role, logout } = useAuth();
   const [incomes, setIncomes] = useState([]);
   const [outcomes, setOutcomes] = useState(null);
   const [orders, setOrders] = useState([]);
   const [status, setStatus] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation();
+
+  const goToDashBoard = () => {
+    navigation.navigate("Dashboard");
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -51,10 +56,8 @@ export default function BranchScreen(props) {
     }
   };
 
-  const { navigation } = props;
-
   useEffect(() => {
-    console.log(branch);
+    console.log("branch", branch);
   }, [branch]);
 
   return (
@@ -67,8 +70,14 @@ export default function BranchScreen(props) {
       <Pressable onPress={() => logout()}>
         <Text>Logout</Text>
       </Pressable>
+      {role === "admin" && (
+        <Pressable onPress={goToDashBoard}>
+          <Text>Dashboard</Text>
+        </Pressable>
+      )}
       {branch && (
         <>
+          <Text style={globalStyles.title_1}> {branch.name}</Text>
           <View style={globalStyles.section}>
             <Text style={globalStyles.title_1}>Ventas hoy</Text>
             {incomes.length > 0 ? (

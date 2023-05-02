@@ -39,7 +39,6 @@ export async function loginApi(authData) {
       },
       body: authData,
     });
-    console.log(response);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -66,7 +65,7 @@ export async function sendData(url, data, token) {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 

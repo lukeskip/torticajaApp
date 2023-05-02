@@ -7,6 +7,7 @@ import {
   Keyboard,
   Pressable,
   Image,
+  Alert,
 } from "react-native";
 import { globalStyles } from "../utils/globalStyles";
 import { useFormik } from "formik";
@@ -34,15 +35,12 @@ export default function LoginForm() {
   const sendAuth = async (values) => {
     try {
       const response = await loginApi(values);
-      console.log("aqui", response);
-      if (response.token) {
+      if (response.success) {
         login(response);
       } else {
-        console.log("No autorizado");
+        Alert.alert(response.message, "Inténtalo de nuevo");
       }
-    } catch (error) {
-      console.log("error", error);
-    }
+    } catch (error) {}
   };
 
   return (

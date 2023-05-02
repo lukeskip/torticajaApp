@@ -12,12 +12,13 @@ import BranchScreen from "./BranchScreen";
 import { API_HOST } from "../utils/constants";
 import { globalStyles } from "../utils/globalStyles";
 import useAuth from "../hooks/useAuth";
-import { useFocusEffect } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 export default function DashboardScreen() {
-  const { auth, role, logout } = useAuth();
+  const { auth, role, logout, setBranch } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
   const [branches, setBranches] = useState([]);
+  const navigation = useNavigation();
 
   const onRefresh = React.useCallback(async () => {
     await loadItems().catch((error) => console.log(error));
@@ -32,6 +33,11 @@ export default function DashboardScreen() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const goTo = (branchItem) => {
+    setBranch(branchItem);
+    navigation.navigate("Branch");
   };
 
   useEffect(() => {
@@ -51,9 +57,15 @@ export default function DashboardScreen() {
     >
       <Text style={globalStyles.title}>Dashboard</Text>
 
-      {branches.map((branch) => (
-        <Pressable style={globalStyles.button}>
-          <Text style={globalStyles.buttonText}>{branch.name}</Text>
+      {branches.map((branchItem) => (
+        <Pressable
+          style={globalStyles.button}
+          onPress={() => {
+            goTo(branchItem);
+          }}
+          key={branchItem.id}
+        >
+          <Text style={globalStyles.buttonText}>{branchItem.name}</Text>
         </Pressable>
       ))}
       <Pressable style={globalStyles.button} onPress={logout}>

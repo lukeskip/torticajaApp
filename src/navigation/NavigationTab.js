@@ -34,29 +34,16 @@ export default function NavigationTab() {
         },
       }}
     >
-      {role === "admin" ? (
-        <Tab.Screen
-          name="Dashboard"
-          component={DashboardScreen}
-          options={{
-            tabBarLabel: "Inicio",
-            tabBarIcon: ({ color, size }) => (
-              <Icon name="home" color="white" size={20} />
-            ),
-          }}
-        />
-      ) : (
-        <Tab.Screen
-          name="Branch"
-          component={BranchScreen}
-          options={{
-            tabBarLabel: "Inicio",
-            tabBarIcon: ({ color, size }) => (
-              <Icon name="home" color="white" size={20} />
-            ),
-          }}
-        />
-      )}
+      <Tab.Screen
+        name="Branch"
+        component={BranchScreen}
+        options={{
+          tabBarLabel: "Inicio",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="home" color="white" size={20} />
+          ),
+        }}
+      />
 
       <Tab.Screen
         name="sale"

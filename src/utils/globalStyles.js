@@ -6,6 +6,10 @@ export const globalStyles = StyleSheet.create({
     height: 200,
     marginBottom: 20,
   },
+  link: {
+    color: colors.mainColor,
+    fontWeight: "bold",
+  },
   content: {
     paddingHorizontal: 20,
   },
@@ -177,6 +181,7 @@ export const globalStyles = StyleSheet.create({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
+    gap: 5,
   },
   flexItem: {
     paddingHorizontal: 5,

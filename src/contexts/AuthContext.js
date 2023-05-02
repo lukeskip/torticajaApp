@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AuthContext = createContext({
   checkLoging: () => {},
   auth: undefined,
+  name: undefined,
   role: undefined,
   store: undefined,
   branch: undefined,
@@ -31,6 +32,7 @@ export function AuthProvider(props) {
   const [productModal, setProductModal] = useState([]);
   const [cartTotal, setCartTotal] = useState([]);
   const [auth, setAuth] = useState(null);
+  const [name, setName] = useState(null);
   const [role, setRole] = useState(null);
   const [store, setStore] = useState(null);
   const [branch, setBranch] = useState(null);
@@ -39,11 +41,13 @@ export function AuthProvider(props) {
   const login = async (userData) => {
     await AsyncStorage.multiSet([
       ["auth", userData.token],
+      ["name", userData.name],
       ["role", userData.role],
       ["store", userData.store.toString()],
       ["branch", userData.branch.toString()],
     ]).then(() => {
       setAuth(userData.token);
+      setName(userData.name);
       setRole(userData.role);
       setStore(parseInt(userData.store));
       setBranch(parseInt(userData.branch));
@@ -141,6 +145,7 @@ export function AuthProvider(props) {
   const valueContext = {
     checkLoging,
     auth,
+    name,
     role,
     store,
     branch,

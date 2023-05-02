@@ -15,6 +15,7 @@ import { globalStyles } from "../utils/globalStyles";
 import useAuth from "../hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import UserInfo from "../components/UserInfo";
 
 export default function BranchScreen(props) {
   const { auth, branch, role, logout } = useAuth();
@@ -56,42 +57,40 @@ export default function BranchScreen(props) {
     }
   };
 
-  useEffect(() => {
-    console.log("branch", branch);
-  }, [branch]);
-
   return (
-    <ScrollView
-      style={[globalStyles.content, { marginTop: 40 }]}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      <Pressable onPress={() => logout()}>
-        <Text>Logout</Text>
-      </Pressable>
-      {role === "admin" && (
-        <Pressable onPress={goToDashBoard}>
-          <Text>Dashboard</Text>
-        </Pressable>
-      )}
-      {branch && (
-        <>
-          <Text style={globalStyles.title_1}> {branch.name}</Text>
-          <View style={globalStyles.section}>
-            <Text style={globalStyles.title_1}>Ventas hoy</Text>
-            {incomes.length > 0 ? (
-              <IncomeList incomes={incomes} />
-            ) : (
-              <Text style={globalStyles.title_2}>No hay datos que mostrar</Text>
-            )}
-          </View>
-          <View style={globalStyles.section}>
-            <Text style={globalStyles.title_1}>Gastos hoy</Text>
-            <OutcomeList outcomes={outcomes} />
-          </View>
-        </>
-      )}
-    </ScrollView>
+    <>
+      <UserInfo />
+      <ScrollView
+        style={globalStyles.content}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {role === "admin" && (
+          <Pressable onPress={goToDashBoard}>
+            <Text>Dashboard</Text>
+          </Pressable>
+        )}
+        {branch && (
+          <>
+            <Text style={globalStyles.title_1}> {branch.name}</Text>
+            <View style={globalStyles.section}>
+              <Text style={globalStyles.title_1}>Ventas hoy</Text>
+              {incomes.length > 0 ? (
+                <IncomeList incomes={incomes} />
+              ) : (
+                <Text style={globalStyles.title_2}>
+                  No hay datos que mostrar
+                </Text>
+              )}
+            </View>
+            <View style={globalStyles.section}>
+              <Text style={globalStyles.title_1}>Gastos hoy</Text>
+              <OutcomeList outcomes={outcomes} />
+            </View>
+          </>
+        )}
+      </ScrollView>
+    </>
   );
 }

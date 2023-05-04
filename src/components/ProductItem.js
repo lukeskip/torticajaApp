@@ -3,9 +3,11 @@ import React, { useRef, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 
 import { globalStyles } from "../utils/globalStyles";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { colors } from "../utils/constants";
 
 export default function ProductItem(props) {
-  const { addProduct, isOpen, setIsOpen, editQuantity } = useAuth();
+  const { addProduct, isOpen, setIsOpen, editQuantity, deleteItem } = useAuth();
   const { product, edit, inOrder } = props;
 
   handleViewRef = (ref) => (view = ref);
@@ -34,6 +36,7 @@ export default function ProductItem(props) {
           </Pressable>
         </View>
       )}
+
       {edit ? (
         <View ref={handleViewRef} style={globalStyles.pill}>
           <Pressable
@@ -52,6 +55,16 @@ export default function ProductItem(props) {
           <View>
             <Text>x{product.quantity}</Text>
           </View>
+          {inOrder && (
+            <Pressable
+              style={[globalStyles.button, globalStyles.buttonSmall]}
+              onPress={() => {
+                deleteItem(product.id);
+              }}
+            >
+              <FontAwesome5 name="trash" color="white" size={12} />
+            </Pressable>
+          )}
         </>
       )}
     </View>

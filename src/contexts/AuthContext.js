@@ -26,6 +26,7 @@ export const AuthContext = createContext({
   setBranch: () => {},
   orderEditing: undefined,
   editQuantity: () => {},
+  deleteItem: () => {},
 });
 
 export function AuthProvider(props) {
@@ -184,6 +185,12 @@ export function AuthProvider(props) {
     }
   };
 
+  const deleteItem = (id) => {
+    const newProducts = orderProducts.filter((item) => item.id !== id);
+    setOrderProducts([...newProducts]);
+    calculateTotal();
+  };
+
   const valueContext = {
     checkLoging,
     auth,
@@ -209,6 +216,7 @@ export function AuthProvider(props) {
     editOrder,
     orderEditing,
     editQuantity,
+    deleteItem,
   };
 
   return (

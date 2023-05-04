@@ -2,10 +2,24 @@ import { View, Text, Pressable } from "react-native";
 import React, { useEffect } from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { colors } from "../utils/constants";
+import { removeItem } from "../api/api-connections";
 import { globalStyles } from "../utils/globalStyles";
+import useAuth from "../hooks/useAuth";
+import { useNavigation } from "@react-navigation/native";
 
 export default function OrderItem(props) {
-  const { order, edition = false } = props;
+  const { auth, editOrder } = useAuth();
+  const navigation = useNavigation();
+  const { order, edition = false, loadItems } = props;
+  remove = async (id) => {
+    try {
+      const response = await removeItem(`/orders/${id}`, auth);
+
+      if (response.success) {
+        loadItems();
+      }
+    } catch (error) {}
+  };
   const iconName = () => {
     switch (order.method) {
       case "cash":
@@ -13,6 +27,11 @@ export default function OrderItem(props) {
       case "card":
         return "credit-card";
     }
+  };
+
+  const editItem = (id, products) => {
+    editOrder(id, products);
+    navigation.navigate("Order");
   };
 
   return (
@@ -25,7 +44,10 @@ export default function OrderItem(props) {
           light
           style={globalStyles.icon}
         />
-        <Text style={globalStyles.title_2}>${order.amount}</Text>
+        <View>
+          <Text style={globalStyles.title_2}>${order.amount}</Text>
+          <Text style={globalStyles.fontSmall}>{order.date}</Text>
+        </View>
       </View>
       <View>
         {order.products && order.products.length > 0 ? (
@@ -39,9 +61,19 @@ export default function OrderItem(props) {
         )}
       </View>
       {edition && (
-        <Pressable style={globalStyles.flex}>
-          <FontAwesome5 name="edit" size={20} color={colors.mainColor} />
-        </Pressable>
+        <View style={globalStyles.flex}>
+          <Pressable style={globalStyles.flex} onPress={() => editItem(order)}>
+            <FontAwesome5 name="edit" size={20} color={colors.mainColor} />
+          </Pressable>
+          <Pressable
+            style={globalStyles.flex}
+            onPress={() => {
+              remove(order.id);
+            }}
+          >
+            <FontAwesome5 name="trash-alt" size={20} color={colors.mainColor} />
+          </Pressable>
+        </View>
       )}
     </View>
   );

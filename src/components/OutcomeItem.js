@@ -44,7 +44,9 @@ export default function OutcomeItem(props) {
       </Text>
       <View>
         <Text style={globalStyles.flexItem}>{outcome.label}</Text>
-        <Text style={globalStyles.flexItem}>{outcome.date}</Text>
+        <Text style={[globalStyles.flexItem, globalStyles.fontSmall]}>
+          {outcome.date}
+        </Text>
       </View>
       <Pressable onPress={() => openImage(outcome.photo)}>
         <FontAwesome5 name="image" size={20} color={colors.mainColor} light />

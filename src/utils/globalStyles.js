@@ -7,7 +7,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 20,
   },
   marginTop: {
-    marginTop: 60,
+    marginTop: 20,
   },
   link: {
     color: colors.mainColor,
@@ -68,13 +68,14 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     paddingBottom: 10,
     lineHeight: 100,
+    gap: 5,
   },
   icon: {
     marginHorizontal: 10,
-    borderWidth: 1,
-    borderColor: colors.greyDark,
-    padding: 10,
-    borderRadius: 30,
+    // borderWidth: 1,
+    // borderColor: colors.greyDark,
+    // padding: 10,
+    // borderRadius: 30,
   },
   iconTab: {
     backgroundColor: colors.mainColor,
@@ -93,6 +94,10 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: colors.mainColor,
     paddingVertical: 10,
     paddingHorizontal: 20,
+  },
+  buttonSmall: {
+    paddingVertical: 2,
+    paddingHorizontal: 10,
   },
   buttonCancel: {
     backgroundColor: colors.error,

@@ -85,40 +85,40 @@ export default function BranchScreen(props) {
               {orders && orders.length > 0 ? (
                 <>
                   <OrderList orders={orders} />
-                  <Pressable>
-                    <Text
-                      style={globalStyles.link}
-                      onPress={() => {
-                        goTo("orders");
-                      }}
-                    >
-                      Ver todas los tickets hoy
-                    </Text>
-                  </Pressable>
                 </>
               ) : (
                 <Text>No hay datos que mostrar</Text>
               )}
+              <Pressable>
+                <Text
+                  style={globalStyles.link}
+                  onPress={() => {
+                    goTo("orders");
+                  }}
+                >
+                  Ver todos los tickets hoy
+                </Text>
+              </Pressable>
             </View>
             <View style={globalStyles.section}>
               <Text style={globalStyles.title_1}>Gastos hoy</Text>
               {outcomes && outcomes.length > 0 ? (
                 <>
                   <OutcomeList outcomes={outcomes} />
-                  <Pressable>
-                    <Text
-                      style={globalStyles.link}
-                      onPress={() => {
-                        goTo("outcomes");
-                      }}
-                    >
-                      Ver todas las ventas
-                    </Text>
-                  </Pressable>
                 </>
               ) : (
                 <Text>No hay datos que mostrar</Text>
               )}
+              <Pressable>
+                <Text
+                  style={globalStyles.link}
+                  onPress={() => {
+                    goTo("outcomes");
+                  }}
+                >
+                  Ver todas las ventas
+                </Text>
+              </Pressable>
             </View>
           </>
         )}

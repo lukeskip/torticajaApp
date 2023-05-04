@@ -32,8 +32,8 @@ export default function OrderListScreen() {
     }, [])
   );
   return (
-    <ScrollView style={globalStyles.content}>
-      <OrderList edition={true} orders={orders} />
+    <ScrollView style={[globalStyles.content, globalStyles.marginTop]}>
+      <OrderList loadItems={loadItems} edition={true} orders={orders} />
     </ScrollView>
   );
 }

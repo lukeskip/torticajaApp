@@ -22,10 +22,16 @@ export default function OrderScreen() {
     setMethod,
     method,
     branch,
+    orderEditing,
   } = useAuth();
   const navigation = useNavigation();
   const goToProducts = () => {
-    navigation.navigate("Products");
+    navigation.navigate("sale");
+  };
+
+  const cancelOrder = () => {
+    emptyCart();
+    navigation.navigate("Branch");
   };
 
   const saveOrder = () => {
@@ -54,9 +60,17 @@ export default function OrderScreen() {
 
   return (
     <>
+      <View style={globalStyles.content}>
+        {orderEditing && (
+          <Text style={globalStyles.title_1}>
+            Orden en edición {orderEditing.id}
+          </Text>
+        )}
+      </View>
       <View
         style={[globalStyles.content, globalStyles.flex, { marginTop: 40 }]}
       >
+        <Text></Text>
         <Pressable
           style={[
             globalStyles.button,
@@ -95,11 +109,24 @@ export default function OrderScreen() {
         contentContainerStyle={[
           globalStyles.content,
           globalStyles.contentMarginTop,
-          // globalStyles.contentCenter,
         ]}
       >
         <View>
-          <ProductList products={orderProducts} edit={false} />
+          <ProductList inOrder={true} products={orderProducts} edit={false} />
+        </View>
+        <View style={globalStyles.flex}>
+          <Pressable
+            style={[globalStyles.button, globalStyles.buttonSuccess]}
+            onPress={goToProducts}
+          >
+            <Text style={globalStyles.buttonText}>Agregar Producto</Text>
+          </Pressable>
+          <Pressable
+            style={[globalStyles.button, globalStyles.buttonError]}
+            onPress={cancelOrder}
+          >
+            <Text style={globalStyles.buttonText}>Cancelar</Text>
+          </Pressable>
         </View>
       </ScrollView>
     </>

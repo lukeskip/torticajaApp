@@ -13,6 +13,7 @@ export const AuthContext = createContext({
   login: () => {},
   logout: () => {},
   orderProducts: [],
+  editOrder: () => {},
   addProduct: () => {},
   isOpen: undefined,
   setProductModal: () => {},
@@ -23,6 +24,8 @@ export const AuthContext = createContext({
   emptyCart: () => {},
   setStore: () => {},
   setBranch: () => {},
+  orderEditing: undefined,
+  editQuantity: () => {},
 });
 
 export function AuthProvider(props) {
@@ -36,6 +39,7 @@ export function AuthProvider(props) {
   const [role, setRole] = useState(null);
   const [store, setStore] = useState(null);
   const [branch, setBranch] = useState(null);
+  const [orderEditing, setOrderEditing] = useState(null);
   const [method, setMethod] = useState("cash");
 
   const login = async (userData) => {
@@ -95,7 +99,7 @@ export function AuthProvider(props) {
     });
   };
 
-  const addProduct = (product, amount = 0) => {
+  const addProduct = (product, quantity = 0) => {
     if (isOnCart(product.id)) {
       const newProducts = orderProducts;
       const currentProduct = newProducts.find(function (found) {
@@ -104,23 +108,26 @@ export function AuthProvider(props) {
 
       if (currentProduct.unit !== "piece") {
         openModal(product);
-        currentProduct.amount =
-          parseFloat(amount) + parseFloat(currentProduct.amount);
-        if (amount > 0) {
+        currentProduct.quantity =
+          parseFloat(quantity) + parseFloat(currentProduct.quantity);
+        if (quantity > 0) {
           setOrderProducts([...newProducts]);
         }
       } else {
-        currentProduct.amount += 1;
+        currentProduct.quantity += 1;
         setOrderProducts([...newProducts]);
       }
     } else {
       if (product.unit !== "piece") {
         openModal(product);
-        if (amount > 0) {
-          setOrderProducts([...orderProducts, { ...product, amount: amount }]);
+        if (quantity > 0) {
+          setOrderProducts([
+            ...orderProducts,
+            { ...product, quantity: quantity },
+          ]);
         }
       } else {
-        setOrderProducts([...orderProducts, { ...product, amount: 1 }]);
+        setOrderProducts([...orderProducts, { ...product, quantity: 1 }]);
       }
     }
   };
@@ -133,6 +140,18 @@ export function AuthProvider(props) {
   const emptyCart = () => {
     setOrderProducts([]);
     setCartTotal(0);
+    setOrderEditing(null);
+  };
+
+  editOrder = (order) => {
+    console.log("🚀 ~ file: AuthContext.js:152 ~ AuthProvider ~ order:", order);
+    setOrderEditing(order);
+    setOrderProducts(order.products);
+    calculateTotal();
+  };
+
+  const selectOrder = (id, products) => {
+    setOrderProducts([...products]);
   };
 
   const openModal = (product) => {
@@ -143,9 +162,26 @@ export function AuthProvider(props) {
   const calculateTotal = () => {
     let total = 0;
     orderProducts.forEach((product) => {
-      total += product.price * product.amount;
+      total += product.price * product.quantity;
     });
-    setCartTotal(total);
+
+    setCartTotal(total.toFixed(2));
+  };
+
+  const editQuantity = (id, quantity) => {
+    const newProducts = orderProducts;
+    const currentProduct = newProducts.find(function (found) {
+      return found.id === id;
+    });
+    currentProduct.quantity = parseFloat(currentProduct.quantity);
+    currentProduct.quantity += quantity;
+
+    if (currentProduct.quantity > 0) {
+      setOrderProducts([...newProducts]);
+      calculateTotal();
+    } else {
+      currentProduct.quantity = 1;
+    }
   };
 
   const valueContext = {
@@ -170,6 +206,9 @@ export function AuthProvider(props) {
     calculateTotal,
     setMethod,
     method,
+    editOrder,
+    orderEditing,
+    editQuantity,
   };
 
   return (

@@ -27,7 +27,8 @@ export default function ProductScreen() {
 
   const loadInfo = async () => {
     try {
-      const response = await getData("/orders/create", auth);
+      const response = await getData("/orders-create", auth);
+
       if (response.status == 401) {
         logout();
       } else {
@@ -35,7 +36,7 @@ export default function ProductScreen() {
         setFilteredProducts(response.data);
       }
     } catch (error) {
-      console.log("orders", error);
+      console.log("🚀 ~ file: ProductScreen.js:43 ~ loadInfo ~ error:", error);
     }
   };
 

@@ -70,7 +70,6 @@ export async function sendData(url, data, token) {
 }
 
 export async function removeItem(url, token) {
-  console.log(token);
   try {
     const response = await fetch(API_HOST + url, {
       method: "POST",

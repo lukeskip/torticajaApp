@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import React, { useRef, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 
@@ -38,15 +38,14 @@ export default function ProductItem(props) {
       )}
 
       {edit ? (
-        <View ref={handleViewRef} style={globalStyles.pill}>
-          <Pressable
-            onPress={() => {
-              addProduct(product);
-            }}
-          >
-            <Text style={{ color: "white" }}>+1</Text>
-          </Pressable>
-        </View>
+        <TouchableOpacity
+          style={globalStyles.pill}
+          onPress={() => {
+            addProduct(product);
+          }}
+        >
+          <Text style={{ color: "white" }}>+1</Text>
+        </TouchableOpacity>
       ) : (
         <>
           <View>

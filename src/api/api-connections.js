@@ -48,7 +48,6 @@ export async function loginApi(authData) {
 
 export async function sendData(url, data, token) {
   const auth = token ? ("Bearer " + token):"";
-  
   try {
     const response = await fetch(API_HOST + url, {
       method: "POST",

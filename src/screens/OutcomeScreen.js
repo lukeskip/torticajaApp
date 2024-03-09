@@ -76,7 +76,7 @@ export default function OutcomeScreen() {
   );
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   spinner: {
     marginTop: 100,
   },

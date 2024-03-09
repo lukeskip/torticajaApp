@@ -144,7 +144,7 @@ export function AuthProvider(props) {
     setOrderEditing(null);
   };
 
-  editOrder = (order) => {
+  const editOrder = (order) => {
     console.log("🚀 ~ file: AuthContext.js:152 ~ AuthProvider ~ order:", order);
     setOrderEditing(order);
     setOrderProducts(order.products);

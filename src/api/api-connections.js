@@ -47,6 +47,7 @@ export async function loginApi(authData) {
 }
 
 export async function sendData(url, data, token) {
+  const auth = token ? ("Bearer " + token):"";
   try {
     const response = await fetch(API_HOST + url, {
       method: "POST",
@@ -58,7 +59,7 @@ export async function sendData(url, data, token) {
         "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Headers":
           "Origin,OPTIONS,X-Requested-With,Content-type,Accept",
-        Authorization: "Bearer " + token,
+        Authorization: auth,
       },
       body: JSON.stringify(data),
     });

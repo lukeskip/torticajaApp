@@ -25,6 +25,7 @@
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-native": "0.71.4",
     "react-native-animatable": "^1.3.3",
     "react-native-bouncy-checkbox": "^3.0.7",
@@ -36,6 +37,7 @@
     "react-native-scalable-image": "^1.1.0",
     "react-native-screens": "~3.20.0",
     "react-native-vector-icons": "^9.2.0",
+    "react-native-web": "~0.18.10",
     "react-numberinput": "^3.2.0",
     "yup": "^1.0.2"
   },
